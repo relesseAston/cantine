@@ -1,0 +1,10 @@
+body {
+    background-color: #ccc;
+    height: auto;
+}
+
+.menus {
+    margin: 10px;
+    display: inline-block;
+    width: 300px;
+}
