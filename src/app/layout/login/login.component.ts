@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/service/auth.service';
 import { TokenStorageService } from 'src/service/token-storage.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, ) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -30,12 +31,13 @@ export class LoginComponent implements OnInit {
     .then( res => {
         console.log(res);
         let token = res.headers.get('Authorization').split('Bearer').pop()
+        let user = jwt_decode(token);
         this.tokenStorage.saveToken(token);
-        this.tokenStorage.saveUser(res);
+        this.tokenStorage.saveUser(user);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        //this.reloadPage();
+        this.reloadPage();
     },
     ).catch(err => {
       console.log('err : ', err);

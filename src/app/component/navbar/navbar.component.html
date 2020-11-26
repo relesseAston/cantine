@@ -13,6 +13,12 @@
         <span routerLink="/menus">MENUS</span>
         <span class="example-spacer"></span>
           <mat-icon>shopping_cart</mat-icon>
+          <span *ngIf="!currentUser" routerLink="/login">LOGIN</span>
+          <div *ngIf="currentUser">
+            <span>{{currentUser.name}} {{currentUser.firstname}}</span>
+            <button type="button" (click)="logout()">Déconnexion</button>
+          </div>
+         
       </mat-toolbar-row>
       </mat-toolbar>
     </p>

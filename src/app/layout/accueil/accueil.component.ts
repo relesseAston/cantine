@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
 import { TokenStorageService } from 'src/service/token-storage.service';
-import { UserService } from 'src/service/user.service';
+
 
 @Component({
   selector: 'app-accueil',
@@ -10,15 +10,12 @@ import { UserService } from 'src/service/user.service';
 })
 export class AccueilComponent implements OnInit {
 
-  constructor(private user_service : UserService) { }
+  constructor(private token_service : TokenStorageService) { }
 
   ngOnInit(): void {
-    this.loadData()
-  }
-
-  async loadData() {
-    let resp = await this.user_service.getAllUser();
-    console.log(resp)
+    let test = this.token_service.getUser();
+    console.log(test.user);
+    
   }
 
 }
