@@ -12,6 +12,8 @@ import { MenusComponent } from './layout/menus/menus.component';
 import { AccueilComponent } from './layout/accueil/accueil.component';
 import { LoginComponent } from './layout/login/login.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

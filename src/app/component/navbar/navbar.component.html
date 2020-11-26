@@ -1,8 +1,19 @@
-<div class="navbar" >
+<!-- <div class="navbar" >
     <div routerLinkActive="active"  *ngFor="let navItem of navItems">
         <a [routerLink]="[navItem.path]">
             <p>{{navItem.title}}</p>
         </a>
     </div>
-</div>
+</div> -->
+
+<p>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span routerLink="/accueil">LUNCHLADY</span>
+        <span routerLink="/menus">MENUS</span>
+        <span class="example-spacer"></span>
+          <mat-icon>shopping_cart</mat-icon>
+      </mat-toolbar-row>
+      </mat-toolbar>
+    </p>
 
