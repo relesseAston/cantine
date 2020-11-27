@@ -1,0 +1,21 @@
+.profile {
+    width: 60%;
+    margin-left: 18%;
+}
+
+.grid {
+    margin-left: 25%;
+    background-color: darkseagreen;
+}
+
+.info {
+    margin-left: 40%;
+}
+
+img {
+    border-radius: 50%;
+}
+
+input, label {
+    display:block;
+}

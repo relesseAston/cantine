@@ -14,6 +14,10 @@ import { LoginComponent } from './layout/login/login.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { ProfileComponent } from './layout/profile/profile.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     FooterComponent,
     MenusComponent,
     AccueilComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,11 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     MatCardModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule,
+    MatInputModule,
+    MatFormFieldModule
+    
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
