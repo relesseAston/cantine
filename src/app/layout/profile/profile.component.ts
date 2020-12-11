@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/service/token-storage.service';
 import { UserService } from 'src/service/user.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -10,13 +11,23 @@ import { UserService } from 'src/service/user.service';
 export class ProfileComponent implements OnInit {
 
   currentUser: any;
+  readonly : Boolean = true;
+  userForm: FormGroup;
+  name: String;
+  firstname: String;
+  email: String;
+  phone: String;
+  address: String;
+  postalCode: String;
+  town: String;
 
-  constructor(private token_service: TokenStorageService, private user_service: UserService) { }
+  constructor(private fb: FormBuilder, private token_service: TokenStorageService, private user_service: UserService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token_service.getUser().user;
     console.log(this.currentUser);
     this.getUserImg();
+    this.generateUserForm();
   }
 
   async getUserImg() {
@@ -24,5 +35,42 @@ export class ProfileComponent implements OnInit {
     const response = await this.user_service.getImgUser(id_user);
     this.currentUser.image64 = response.image64;
   }
+
+  generateUserForm() {
+    this.userForm = this.fb.group({
+      name: [this.currentUser.name],
+      firstname: [this.currentUser.firstname],
+      email: [this.currentUser.email],
+      phone: [this.currentUser.phone],
+      address: [this.currentUser.address],
+      postalCode: [this.currentUser.postalCode],
+      town: [this.currentUser.town],
+      wallet: [this.currentUser.wallet],
+      password: ['bonjour'],
+      sex: [this.currentUser.sex],
+      isLunchLady: [this.currentUser.isLunchLady],
+    });
+  }
+
+  readonlyOn() {
+    this.readonly = false;
+  }
+
+  readonlyOff() {
+    this.readonly = true;
+  }
+
+  modificationProfile(idUser: number) {
+    console.log(idUser);
+    console.log(this.userForm.value);
+    this.user_service.updateProfile(idUser, JSON.stringify(this.userForm.value))
+    .then(res => {
+      console.log('res', res)
+    })
+    .catch(err => {
+      console.log('err', err);
+    });
+  }
+
 
 }

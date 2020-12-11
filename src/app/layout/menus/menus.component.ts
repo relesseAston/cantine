@@ -23,6 +23,24 @@ export class MenusComponent implements OnInit {
     this.listeMenus.forEach(element => {
       this.getImageMenu(element.id);
     });
+    this.getWeekMeal();
+  }
+
+  async getWeekMeal(){
+    const response = await this.cantiniere_api.getWeekMeal();
+    console.log(response);
+    this.listeMenus.forEach(element => {
+      if(element.meals != undefined) {
+        element.meals.forEach(element2 => {
+          //console.log(element2);
+          response.forEach(element3 => {
+            if(element3.id === element2.id) {
+              console.log(element);
+            }  
+          });
+        });
+      }
+    })
   }
 
   async getImageMenu(id_menu) {
