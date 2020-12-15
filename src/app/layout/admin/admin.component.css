@@ -1,0 +1,16 @@
+.admin-section {
+    display: flex;
+    justify-content: center;
+  }
+  .example-card {
+      background-color: #3f51b5;
+      max-width: 400px;
+      color: #fff;
+  }
+  
+  .example-card:hover {
+    background-color: #fff;
+    cursor: pointer;
+    color: #3f51b5;
+  }
+    

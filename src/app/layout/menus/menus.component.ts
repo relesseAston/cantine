@@ -19,7 +19,7 @@ export class MenusComponent implements OnInit {
   async getWeekMenus(){
     const response = await this.cantiniere_api.getWeekMenus();
     this.listeMenus = response;
-    console.log(this.listeMenus);
+    // console.log(this.listeMenus);
     this.listeMenus.forEach(element => {
       this.getImageMenu(element.id);
     });
