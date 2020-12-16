@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers().subscribe( (data) => {
       this.users = data.body;
       this.users = this.sortUsersByName(this.users);
-      console.log(this.users);
+      // console.log(this.users);
       this.dataSource.data = this.users;
     })
   }
