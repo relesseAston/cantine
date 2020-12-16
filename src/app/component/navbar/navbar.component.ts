@@ -30,7 +30,10 @@ export class NavbarComponent implements OnInit {
   constructor(private token_service: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.token_service.getUser().user;
+
+    if (this.currentUser) {
+      this.currentUser = this.token_service.getUser().user;
+    }
     this.navItems = ROUTES.filter(navItem => navItem);
   }
 
