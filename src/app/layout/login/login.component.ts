@@ -28,40 +28,27 @@ export class LoginComponent implements OnInit {
 
   connexion(): void {
     this.authService.login(JSON.stringify(this.form))
-    .then( res => {
+      .then( res => {
         console.log(res);
-        let token = res.headers.get('Authorization').split('Bearer').pop()
+        // let token = res.headers.get('Authorization').split('Bearer').pop()
+        let token = res.headers.get('Authorization')
+
         let user = jwt_decode(token);
+
         this.tokenStorage.saveToken(token);
         this.tokenStorage.saveUser(user);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.reloadPage();
-    },
-    ).catch(err => {
-      console.log('err : ', err);
-      this.errorMessage = err.error.message;
-      //console.log(this.errorMessage);
-      this.isLoginFailed = true;
-    }
-
-    )/*.subscribe(
-      data => {
-        console.log(data);
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.reloadPage();
       },
-      err => {
+      ).catch(err => {
+        console.log('err : ', err);
         this.errorMessage = err.error.message;
         //console.log(this.errorMessage);
         this.isLoginFailed = true;
-      }
-    );*/
+        }
+      );
   }
 
   reloadPage(): void {

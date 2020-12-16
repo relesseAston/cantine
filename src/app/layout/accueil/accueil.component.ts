@@ -13,8 +13,11 @@ export class AccueilComponent implements OnInit {
   constructor(private token_service : TokenStorageService) { }
 
   ngOnInit(): void {
+
     let test = this.token_service.getUser();
-    console.log(test.user);
+    if (test) {
+      console.log(test.user);
+    }
     
   }
 
