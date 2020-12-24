@@ -23,7 +23,8 @@ export class OrderService {
   }}
 
   addOrder(cart) {
-    return this.http.put(ORDER_ROOT + '/add', cart);
+    console.log(cart)
+    return this.http.put(ORDER_ROOT + '/add', JSON.stringify(cart), this.httpOptions);
   }
 
   findAll(): Observable<any> {

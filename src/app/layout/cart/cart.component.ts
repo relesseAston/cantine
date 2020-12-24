@@ -45,10 +45,10 @@ export class CartComponent implements OnInit {
 
   order() {
     this.orderService.addOrder({
-      userId: this.token_service.getUser().user,
+      userId: this.token_service.getUser().user.id,
       constraintId: 0,
       quantity: this.cart
-    })
+    }).subscribe(data => console.log(data))
   }
 
   resetCart() {
