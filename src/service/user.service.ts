@@ -1,10 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-=======
 import { TokenStorageService } from './token-storage.service';
->>>>>>> 4233c1da845e42b6b0ea233f005f7731c7a5888a
 
 @Injectable({
   providedIn: 'root'
