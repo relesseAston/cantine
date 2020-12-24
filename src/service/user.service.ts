@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
@@ -30,5 +31,10 @@ export class UserService {
 
   updateProfile(idUser: number, userForm: any): Promise<any> {
     return this.http.patch<any>(this.api_url+'user/update/'+idUser, userForm, this.httpOptions).toPromise();
+  }
+  setInscription(data: any): Observable<any> {
+
+    console.log(data)
+    return this.http.put<any>(this.api_url+'user/register', data);
   }
 }

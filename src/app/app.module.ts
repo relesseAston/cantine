@@ -21,6 +21,8 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { InscriptionComponent } from './layout/inscription/inscription.component';
+import { ForgotpasswordComponent } from './layout/forgotpassword/forgotpassword.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -43,6 +45,8 @@ import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
     AccueilComponent,
     LoginComponent,
     ProfileComponent,
+    InscriptionComponent,
+    ForgotpasswordComponent,
     AdminComponent,
     DetailMealComponent,
     CartComponent,
@@ -60,9 +64,9 @@ import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
     MatBadgeModule,
     MatGridListModule,
     MatInputModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
+    MatFormFieldModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatRadioModule,
