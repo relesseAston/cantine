@@ -34,9 +34,10 @@ export class NavbarComponent implements OnInit {
     private cart:CartComponent) { }
 
   ngOnInit(): void {
-    this.currentUser = this.token_service.getUser().user;
-    this.isLunchLady = this.currentUser.isLunchLady;
-    if(this.token_service.getUser()) this.currentUser = this.token_service.getUser().user;
+    if(this.token_service.getUser()) {
+      this.currentUser = this.token_service.getUser().user;
+      this.isLunchLady = this.currentUser.isLunchLady;
+    }
     this.navItems = ROUTES.filter(navItem => navItem);
   }
 
