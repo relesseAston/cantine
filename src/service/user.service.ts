@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
+import { User } from '../app/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,12 @@ export class UserService {
     };
   }
 
-  getAllUser(): Promise<any>{
-    return this.http.get<any>(this.api_url+'user/findall').toPromise();
+  async getAllUser(): Promise<any>{
+    return this.http.get<User>(this.api_url+'user/findall', this.httpOptions).toPromise();
   }
 
   async getImgUser(id_user: number): Promise<any> {
-    console.log(this.httpOptions);
+    //console.log(this.httpOptions);
     return this.http.get<any>(this.api_url+'user/findimg/'+id_user, this.httpOptions).toPromise();
   }
 

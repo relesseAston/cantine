@@ -1,0 +1,33 @@
+.user-table {
+    display: flex;
+    justify-content: center;
+  }
+  
+  table {
+    width: 70%;
+  }
+  
+  .credit {
+    background-color: #cccccc61;
+    font-size: 0.8em;
+  }
+  
+  .credit:hover {
+    background-color: #3f51b5;
+    color: #fff;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .debit {
+    background-color: #cccccc61;
+    font-size: 0.8em;
+    margin-left: 5px;
+  }
+  
+  .debit:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
