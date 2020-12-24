@@ -13,10 +13,6 @@ export class CantiniereServiceService {
   
   constructor( public http: HttpClient) { }
 
-  connexion(obj : any) {
-    return this.http.post<any>(this.api_url+'login', obj)
-  }
-
   async getMenus(): Promise<any>{
     return this.http.get<any>(this.api_url+"menu/findall",
     {
@@ -34,4 +30,21 @@ export class CantiniereServiceService {
   async getWeekMenus(): Promise<any>{
     return this.http.get<any>(this.api_url+"menu/findallavailablefortoday").toPromise();
   }
+
+  async getWeekMeal(): Promise<any>{
+    return this.http.get<any>(this.api_url+"meal/findallavailablefortoday").toPromise();
+  }
+
+  async getImageMeal(id_meal: number): Promise<any> {
+    return this.http.get<any>(this.api_url+'meal/findimg/'+id_meal).toPromise();
+  }
+
+  async getMealById(id_meal: number): Promise<any> {
+    return this.http.get<any>(this.api_url+'meal/find/'+id_meal).toPromise();
+  }
+
+  findById(id:number) {
+    return this.http.get(this.api_url + 'menu/find/' + id);
+  }
+  
 }

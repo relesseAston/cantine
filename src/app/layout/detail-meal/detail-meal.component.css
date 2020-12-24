@@ -1,0 +1,19 @@
+.card {
+    margin-right: 250px;
+    margin-left: 250px;
+}
+
+.mealImg {
+    width: 200px;
+    height: 200px;
+}
+
+.description {
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+.ingredient {
+    padding-top: 30px;
+    padding-left: 20px;
+}

@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccueilComponent } from './layout/accueil/accueil.component';
+import { AdminComponent } from './layout/admin/admin.component';
+import { DetailMealComponent } from './layout/detail-meal/detail-meal.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MenusComponent } from './layout/menus/menus.component';
 import { ProfileComponent } from './layout/profile/profile.component';
+<<<<<<< HEAD
 import { InscriptionComponent } from './layout/inscription/inscription.component';
 import { ForgotpasswordComponent } from './layout/forgotpassword/forgotpassword.component';
+=======
+import { CartComponent } from './layout/cart/cart.component';
+>>>>>>> 4233c1da845e42b6b0ea233f005f7731c7a5888a
 
 
 const routes: Routes = [
@@ -31,12 +37,26 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+<<<<<<< HEAD
     path: 'inscription',
     component: InscriptionComponent
   },
   {
     path: 'forgotpassword', 
     component: ForgotpasswordComponent },
+=======
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
+    path: 'detailMeal/:id',
+    component: DetailMealComponent
+  },
+  { 
+    path: 'cart', 
+    component:CartComponent 
+  },
+>>>>>>> 4233c1da845e42b6b0ea233f005f7731c7a5888a
 ];
 
 @NgModule({

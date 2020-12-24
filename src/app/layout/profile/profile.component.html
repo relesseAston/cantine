@@ -5,68 +5,85 @@
     </mat-card-header>
     <mat-card-content>
         <mat-grid-list cols="4" rowHeight="100px">
+            <form [formGroup]="userForm">
+                <mat-grid-tile colspan="1" rowspan="3">
+                    <img [src]="currentUser.image64"/>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Nom</mat-label>
+                        <input matInput type="text" formControlName="name" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Prénom</mat-label>
+                        <input matInput type="text" formControlName="firstname" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="text" formControlName="email" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Téléphone</mat-label>
+                        <input matInput type="text" formControlName="phone" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Adresse</mat-label>
+                        <input matInput type="text" formControlName="address" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+                
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Code Postal</mat-label>
+                        <input matInput type="text" formControlName="postalCode" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Ville</mat-label>
+                        <input matInput type="text" formControlName="town" [readonly]="readonly">
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Wallet</mat-label>
+                        <input matInput type="text"formControlName="wallet" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="text"formControlName="password" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
 
-            <mat-grid-tile colspan="1" rowspan="3">
-                <img [src]="currentUser.image64"/>
-            </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <button mat-raised-button color="primary" type="button">changer image</button>
+                </mat-grid-tile>
 
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Nom</mat-label>
-                    <input matInput type="text" [value]="currentUser.name">
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Prénom</mat-label>
-                    <input matInput type="text" [value]="currentUser.firstname">
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Email</mat-label>
-                    <input matInput type="text" [value]="currentUser.email">
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Téléphone</mat-label>
-                    <input matInput type="text" [value]="currentUser.phone">
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Adresse</mat-label>
-                    <input matInput type="text" [value]="currentUser.address">
-                </mat-form-field>
-            </mat-grid-tile>
-            
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Code Postal</mat-label>
-                    <input matInput type="text" [value]="currentUser.postalCode">
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Ville</mat-label>
-                    <input matInput type="text" [value]="currentUser.town">
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="legacy">
-                    <mat-label>Wallet</mat-label>
-                    <input matInput type="text" [value]="currentUser.wallet">
-                </mat-form-field>
-            </mat-grid-tile>
-            
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <button mat-raised-button color="primary" *ngIf="readonly" type="button" (click)="readonlyOn()">Modifier</button>
+                    <button mat-raised-button color="warn" *ngIf="!readonly" type="button" (click)="readonlyOff()">Annuler</button>
+                    <button mat-raised-button style="background-color: green; color:white" *ngIf="!readonly" type="button" (click)="modificationProfile(currentUser.id)">Enregistrer</button>
+                </mat-grid-tile>
+            </form>
         </mat-grid-list>
-        
+         
     </mat-card-content>
 </mat-card>
