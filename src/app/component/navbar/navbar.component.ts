@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartComponent } from 'src/app/layout/cart/cart.component';
 import { TokenStorageService } from 'src/service/token-storage.service';
 
 
@@ -17,7 +18,8 @@ export const ROUTES: RouteInfo[] = [
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers: [CartComponent]
 })
 
 export class NavbarComponent implements OnInit {
@@ -26,16 +28,27 @@ export class NavbarComponent implements OnInit {
 
   navItems: any[];
 
-  constructor(private token_service: TokenStorageService) { }
+  constructor(
+    private token_service: TokenStorageService,
+    private cart:CartComponent) { }
 
   ngOnInit(): void {
-    this.currentUser = this.token_service.getUser().user;
+    if(this.token_service.getUser()) this.currentUser = this.token_service.getUser().user;
     this.navItems = ROUTES.filter(navItem => navItem);
   }
 
   logout() {
     this.token_service.signOut();
     window.location.reload();
+  }
+
+  getCartQuantity() {
+    if(this.cart.cart) {
+      return this.cart.cart.quantity.length;
+    } else {
+      return 0;
+    }
+    
   }
 
 }

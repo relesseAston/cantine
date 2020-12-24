@@ -34,4 +34,8 @@ export class CantiniereServiceService {
   async getWeekMeal(): Promise<any>{
     return this.http.get<any>(this.api_url+"meal/findallavailablefortoday").toPromise();
   }
+
+  findById(id:number) {
+    return this.http.get(this.api_url + 'menu/find/' + id);
+  }
 }
