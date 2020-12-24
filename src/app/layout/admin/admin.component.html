@@ -1,7 +1,43 @@
 <p>admin works!</p>
 
 <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="gestion utilisateurs">Content 1</mat-tab>
-    <mat-tab label="gestion commandes">Content 2</mat-tab>
+    <mat-tab label="gestion utilisateurs">
+
+        <body>
+            <h3>Récapitulatif des commandes passées par l'utilisateur n°{{userId}}</h3>
+            <div class="menus" *ngFor="let commande of commandes">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>Commande n°{{commande.id}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>Commande {{(commande.status == 0 ? "créée" : commande.status == 1 ? "validée" : "annulée")}}</p>
+                        <p>Effectuée le {{commande.creationDate | date:'dd/MM/yyyy'}} à {{commande.creationTime}}</p>
+                    </mat-card-content>
+                    <!--<button>Valider</button>--><button [disabled]="commande.status == 2" (click)="cancelOrder(commande.id)">Annuler commande</button>
+                </mat-card>
+            </div>
+        </body>
+    </mat-tab>
+    <mat-tab label="gestion commandes">
+
+        <body>
+            <h3>Récapitulatif des commandes passées</h3>
+            <div class="menus" *ngFor="let commande_passee of commandes_passees">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>Commande n°{{commande_passee.id}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>Commande {{(commande_passee.status == 0 ? "créée" : commande_passee.status == 1 ? "validée" : "annulée")}}</p>
+                        <p>Effectuée par l'utilisateur n°{{commande_passee.user.id}}</p>
+                        <p>({{commande_passee.user.firstname}} {{commande_passee.user.name | uppercase}})</p>
+                        <p>le {{commande_passee.creationDate | date:'dd/MM/yyyy'}} à {{commande_passee.creationTime}}</p>
+                    </mat-card-content>
+                    <!--<button>Valider</button>--><button [disabled]="commande_passee.status == 2" (click)="cancelOrder(commande_passee.id)">Annuler commande</button>
+                </mat-card>
+            </div>
+        </body>
+    </mat-tab>
     <mat-tab label="gestion menus">Content 3</mat-tab>
 </mat-tab-group>

@@ -29,6 +29,10 @@ import { AdminComponent } from './layout/admin/admin.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DetailMealComponent } from './layout/detail-meal/detail-meal.component';
 import { CartComponent } from './layout/cart/cart.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
+
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,8 @@ import { CartComponent } from './layout/cart/cart.component';
     ProfileComponent,
     AdminComponent,
     DetailMealComponent,
-    CartComponent
+    CartComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,7 @@ import { CartComponent } from './layout/cart/cart.component';
     MatRadioModule,
     MatButtonModule,
     MatTabsModule,
-    
+    MatDialogModule
   ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
