@@ -14,7 +14,7 @@
                         <p>Commande {{(commande.status == 0 ? "créée" : commande.status == 1 ? "validée" : "annulée")}}</p>
                         <p>Effectuée le {{commande.creationDate | date:'dd/MM/yyyy'}} à {{commande.creationTime}}</p>
                     </mat-card-content>
-                    <!--<button>Valider</button>--><button [disabled]="commande.status == 2" (click)="cancelOrder(commande.id)">Annuler commande</button>
+                    <button [disabled]="commande.status == 1" (click)="payOrder(commande.id)">Valider et payer commande</button><button [disabled]="commande.status == 2" (click)="cancelOrder(commande.id)">Annuler commande</button>
                 </mat-card>
             </div>
         </body>
@@ -34,7 +34,7 @@
                         <p>({{commande_passee.user.firstname}} {{commande_passee.user.name | uppercase}})</p>
                         <p>le {{commande_passee.creationDate | date:'dd/MM/yyyy'}} à {{commande_passee.creationTime}}</p>
                     </mat-card-content>
-                    <!--<button>Valider</button>--><button [disabled]="commande_passee.status == 2" (click)="cancelOrder(commande_passee.id)">Annuler commande</button>
+                    <button [disabled]="commande_passee.status == 1" (click)="payOrder(commande_passee.id)">Valider et payer commande</button><button [disabled]="commande_passee.status == 2" (click)="cancelOrder(commande_passee.id)">Annuler commande</button>
                 </mat-card>
             </div>
         </body>

@@ -50,5 +50,22 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  payOrder(id: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirmation de la commande',
+        message: "Confirmer et payer la commande n°" + id + ' ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'confirm') {
+        this.cantiniere_api
+          .pay(id)
+          .subscribe(() => window.location.reload());
+        // console.log("Commande n°" + id + " validée et payée !");
+      }
+    });
+  }
+
   ngOnInit(): void {}
 }
