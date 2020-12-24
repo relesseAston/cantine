@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
       postalCode: [this.currentUser.postalCode],
       town: [this.currentUser.town],
       wallet: [this.currentUser.wallet],
-      password: ['bonjour'],
+      password: [''],
       sex: [this.currentUser.sex],
       isLunchLady: [this.currentUser.isLunchLady],
     });

@@ -9,6 +9,8 @@ import { CantiniereServiceService } from 'src/service/cantiniere-service.service
 export class MenusComponent implements OnInit {
 
   listeMenus = [];
+  panelOpenState = false;
+  radioSelected: any;
 
   constructor(private cantiniere_api : CantiniereServiceService) { }
 
@@ -22,25 +24,12 @@ export class MenusComponent implements OnInit {
     console.log(this.listeMenus);
     this.listeMenus.forEach(element => {
       this.getImageMenu(element.id);
-    });
-    this.getWeekMeal();
-  }
-
-  async getWeekMeal(){
-    const response = await this.cantiniere_api.getWeekMeal();
-    console.log(response);
-    this.listeMenus.forEach(element => {
-      if(element.meals != undefined) {
-        element.meals.forEach(element2 => {
-          //console.log(element2);
-          response.forEach(element3 => {
-            if(element3.id === element2.id) {
-              console.log(element);
-            }  
-          });
+      if(element.meals) {
+        element.meals.forEach(element_meal => {
+          this.getImageMeal(element_meal.id);
         });
       }
-    })
+    });
   }
 
   async getImageMenu(id_menu) {
@@ -50,8 +39,31 @@ export class MenusComponent implements OnInit {
         element.img = response.image64;
       }
     });
-    //console.log(this.listeMenus);
-  
+    
+  }
+
+  async getImageMeal(id_meal: number) {
+    const response = await this.cantiniere_api.getImageMeal(id_meal);
+    this.listeMenus.forEach(element => {
+      if(element.meals) {
+        element.meals.forEach(element_meal => {
+          if(element_meal.imageId === response.id){
+            element_meal.img64 = response.image64;
+          }
+        });
+      }
+    })
+  }
+
+  addPanier(id_menu: number) {
+    var id_meal = this.radioSelected;
+    var quantity: number = +(<HTMLInputElement>document.getElementById(this.radioSelected.toString())).value;
+    var order = {
+      quantity: quantity,
+      mealId: id_meal,
+      menuId: id_menu
+    }
+    console.log(order);
   }
 
 }

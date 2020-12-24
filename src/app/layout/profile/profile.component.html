@@ -67,11 +67,23 @@
                 </mat-grid-tile>
     
                 <mat-grid-tile colspan="1" rowspan="1">
-                    <button *ngIf="readonly" type="button" (click)="readonlyOn()">Modifier</button>
-                    <button *ngIf="!readonly" type="button" (click)="readonlyOff()">Annuler</button>
-                    <button *ngIf="!readonly" type="button" (click)="modificationProfile(currentUser.id)">Enregistrer</button>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="text"formControlName="password" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <button mat-raised-button color="primary" type="button">changer image</button>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <button mat-raised-button color="primary" *ngIf="readonly" type="button" (click)="readonlyOn()">Modifier</button>
+                    <button mat-raised-button color="warn" *ngIf="!readonly" type="button" (click)="readonlyOff()">Annuler</button>
+                    <button mat-raised-button style="background-color: green; color:white" *ngIf="!readonly" type="button" (click)="modificationProfile(currentUser.id)">Enregistrer</button>
                 </mat-grid-tile>
             </form>
-        </mat-grid-list> 
+        </mat-grid-list>
+         
     </mat-card-content>
 </mat-card>

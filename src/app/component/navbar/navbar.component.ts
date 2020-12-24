@@ -23,6 +23,7 @@ export const ROUTES: RouteInfo[] = [
 export class NavbarComponent implements OnInit {
 
   currentUser: any;
+  isLunchLady: Boolean;
 
   navItems: any[];
 
@@ -30,6 +31,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.token_service.getUser().user;
+    this.isLunchLady = this.currentUser.isLunchLady;
     this.navItems = ROUTES.filter(navItem => navItem);
   }
 

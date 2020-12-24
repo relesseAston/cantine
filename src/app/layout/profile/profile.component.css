@@ -19,3 +19,8 @@ img {
 input, label {
     display:block;
 }
+
+button {
+    margin: 3px;
+    width: 130px;
+}

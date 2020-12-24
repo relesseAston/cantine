@@ -12,6 +12,7 @@
         <span routerLink="/accueil">LUNCHLADY</span>
         <span routerLink="/menus">MENUS</span>
         <span *ngIf="currentUser" routerLink="/profile">PROFILE</span>
+        <span *ngIf="currentUser && isLunchLady" routerLink="/admin">ADMIN</span>
         <span class="example-spacer"></span>
           <mat-icon>shopping_cart</mat-icon>
           <span *ngIf="!currentUser" routerLink="/login">LOGIN</span>

@@ -20,6 +20,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { AdminComponent } from './layout/admin/admin.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DetailMealComponent } from './layout/detail-meal/detail-meal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MenusComponent,
     AccueilComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminComponent,
+    DetailMealComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +52,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatTabsModule,
     
   ],
   providers: [
