@@ -6,6 +6,7 @@ import { DetailMealComponent } from './layout/detail-meal/detail-meal.component'
 import { LoginComponent } from './layout/login/login.component';
 import { MenusComponent } from './layout/menus/menus.component';
 import { ProfileComponent } from './layout/profile/profile.component';
+import { CartComponent } from './layout/cart/cart.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,11 @@ const routes: Routes = [
   {
     path: 'detailMeal/:id',
     component: DetailMealComponent
-  }
+  },
+  { 
+    path: 'cart', 
+    component:CartComponent 
+  },
 ];
 
 @NgModule({

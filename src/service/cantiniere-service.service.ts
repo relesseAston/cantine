@@ -42,4 +42,9 @@ export class CantiniereServiceService {
   async getMealById(id_meal: number): Promise<any> {
     return this.http.get<any>(this.api_url+'meal/find/'+id_meal).toPromise();
   }
+
+  findById(id:number) {
+    return this.http.get(this.api_url + 'menu/find/' + id);
+  }
+  
 }
