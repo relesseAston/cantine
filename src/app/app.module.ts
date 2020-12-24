@@ -33,8 +33,9 @@ import { DetailMealComponent } from './layout/detail-meal/detail-meal.component'
 import { CartComponent } from './layout/cart/cart.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
+import { DialogBoxCreditComponent } from './component/dialog-box-credit/dialog-box-credit.component';
+import { DialogBoxDebitComponent } from './component/dialog-box-debit/dialog-box-debit.component';
 import { MatTableModule } from '@angular/material/table';
-
 
 
 
@@ -52,7 +53,9 @@ import { MatTableModule } from '@angular/material/table';
     AdminComponent,
     DetailMealComponent,
     CartComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    DialogBoxCreditComponent,
+    DialogBoxDebitComponent
   ],
   imports: [
     BrowserModule,
