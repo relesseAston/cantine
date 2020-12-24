@@ -18,4 +18,11 @@ export class AuthService {
   login(credentials) : Promise<any> {
     return this.http.post<any>(this.api_url+'login', credentials, {observe: "response"}).toPromise();
   }
+  forgotPassword(email) {
+    let obs: Observable<any>
+    const url = this.api_url+'forgotpassword/';
+    obs = this.http.post(url, email)
+    console.log(obs)
+    return obs;
+  };
 }

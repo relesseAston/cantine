@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +20,8 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { InscriptionComponent } from './layout/inscription/inscription.component';
+import { ForgotpasswordComponent } from './layout/forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MenusComponent,
     AccueilComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    InscriptionComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +44,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatGridListModule,
     MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatFormFieldModule
     
   ],

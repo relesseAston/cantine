@@ -1,2 +1,17 @@
+<form class="" [formGroup]="userProfile" (ngSubmit)="onSubmit()">
+    <label for="email">Adresse e-mail</label>
+    <input type="email" class="" id="email" formControlName="email" placeholder="Votre adresse e-mail">
+    <label for="password">Mot de passe</label>
+    <input type="password" class="" id="password"  formControlName="password"  placeholder="Votre mot de passe">
+    <button type="submit" >connexion</button>
+</form>
 <p>{{isLoggedIn}}</p>
-<button type="button" (click)="connexion()">connexion</button>
+
+
+<div class="text-center mt-5 subscribe">
+    <a [routerLink]="['/forgotpassword']">Mot de passe oublié</a>
+</div>
+
+<div class="text-center mt-5 subscribe">
+    <a [routerLink]="['/inscription']">Pas encore inscrit ?</a>
+</div>
