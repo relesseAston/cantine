@@ -1,4 +1,4 @@
-// Karma configuration file, see link for more information
+// Karma configuration file, see link for more redrmation
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
@@ -23,7 +23,7 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_red,
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,

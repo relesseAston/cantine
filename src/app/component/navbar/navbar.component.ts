@@ -3,12 +3,12 @@ import { CartComponent } from 'src/app/layout/cart/cart.component';
 import { TokenStorageService } from 'src/service/token-storage.service';
 
 
-declare interface RouteInfo {
+declare interface Routered {
   path: string;
   title: string;
 }
 
-export const ROUTES: RouteInfo[] = [
+export const ROUTES: Routered[] = [
   {path: '/accueil', title: 'Accueil'},
   {path: '/menus', title: 'Menus'},
   {path: '/login', title: 'Login'}
