@@ -45,7 +45,7 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
-    path: 'detailMeal/:id',
+    path: 'menu/:menuId/meal/:mealId',
     component: DetailMealComponent
   },
   { 

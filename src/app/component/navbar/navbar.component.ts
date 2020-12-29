@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private token_service: TokenStorageService,
-    private cart:CartComponent) { }
+    public cart:CartComponent) { }
 
   ngOnInit(): void {
     if(this.token_service.getUser()) {
@@ -39,20 +39,12 @@ export class NavbarComponent implements OnInit {
       this.isLunchLady = this.currentUser.isLunchLady;
     }
     this.navItems = ROUTES.filter(navItem => navItem);
+    console.log(this.cart)
   }
 
   logout() {
     this.token_service.signOut();
     window.location.reload();
-  }
-
-  getCartQuantity() {
-    if(this.cart.cart) {
-      return this.cart.cart.quantity.length;
-    } else {
-      return 0;
-    }
-    
   }
 
 }
