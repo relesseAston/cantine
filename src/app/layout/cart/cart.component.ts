@@ -4,6 +4,8 @@ import { MealService } from 'src/service/meal.service';
 import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
 import { OrderService } from 'src/service/order.service';
 import { TokenStorageService } from 'src/service/token-storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginSnackbarComponent } from 'src/app/component/login-snackbar/login-snackbar.component';
 
 const EMPTY_CART = []
 
@@ -24,8 +26,9 @@ export class CartComponent implements OnInit {
     private orderService:OrderService,
     private mealService:MealService,
     private menuService:CantiniereServiceService,
-    private token_service:TokenStorageService 
-  ) { 
+    private token_service:TokenStorageService,
+    private _snackBar: MatSnackBar
+    ) { 
     if (this.cart = {}) this.cart = EMPTY_CART;
     if (localStorage.getItem('cart')) this.cart = JSON.parse(localStorage.getItem('cart'));
     this.fillCartTable()
@@ -44,11 +47,16 @@ export class CartComponent implements OnInit {
   }
 
   order() {
-    this.orderService.addOrder({
-      userId: this.token_service.getUser().user.id,
-      constraintId: 0,
-      quantity: this.cart
-    }).subscribe(data => console.log(data))
+    if (this.token_service.getUser()) {
+      this.orderService.addOrder({
+        userId: this.token_service.getUser().user.id,
+        constraintId: 0,
+        quantity: this.cart
+      }).subscribe(data => console.log(data))
+    } else {
+      this.openSnackBar();
+    }
+    
   }
 
   resetCart() {
@@ -117,6 +125,12 @@ export class CartComponent implements OnInit {
     this.cartTable = newCartTable;
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(LoginSnackbarComponent, {
+      duration: 20000,
+    });
   }
 
   getMeal(id) {

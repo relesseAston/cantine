@@ -36,6 +36,8 @@ import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
 import { DialogBoxCreditComponent } from './component/dialog-box-credit/dialog-box-credit.component';
 import { DialogBoxDebitComponent } from './component/dialog-box-debit/dialog-box-debit.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginSnackbarComponent } from './component/login-snackbar/login-snackbar.component';
 
 
 
@@ -55,7 +57,8 @@ import { MatTableModule } from '@angular/material/table';
     CartComponent,
     ConfirmDialogComponent,
     DialogBoxCreditComponent,
-    DialogBoxDebitComponent
+    DialogBoxDebitComponent,
+    LoginSnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatTabsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
