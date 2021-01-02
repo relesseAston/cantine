@@ -51,7 +51,7 @@ const routes: Routes = [
     data: { lunchLadyRole: true } 
   },
   {
-    path: 'menu/:menuId/meal/:mealId',
+    path: 'meal/:mealId',
     component: DetailMealComponent
   },
   { 

@@ -1,6 +1,20 @@
 .card {
-    margin-right: 250px;
-    margin-left: 250px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.infos {
+    position: relative;
+    width: 50%;
+    margin-left: 5%;
+}
+
+.action {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .mealImg {
@@ -28,10 +42,7 @@
     height: auto;
 }
 
-#meal-order div {
-    width: 40%;
-    margin-left: 5%;
-}
+
 
 #meal-order div input, #meal-order button {
     margin-right: 2%;

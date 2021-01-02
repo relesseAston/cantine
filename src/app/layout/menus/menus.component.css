@@ -9,6 +9,10 @@
     width: 470px;*/
 }
 
+.example-card {
+    max-width: 400px;
+  }
+
 .expansion_panel {
     height: 200px !important;
 }

@@ -14,7 +14,6 @@ export class AccueilComponent implements OnInit {
 
   ngOnInit(): void {
     let test = this.token_service.getUser();
-    console.log(test.user);
     
   }
 

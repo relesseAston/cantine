@@ -13,7 +13,6 @@ import { CartComponent } from 'src/app/layout/cart/cart.component';
 export class DetailMealComponent implements OnInit {
 
   mealId : number;
-  menuId : number;
   meal: any;
   mealImg64: String;
   quantity = 0;
@@ -24,7 +23,6 @@ export class DetailMealComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.route.snapshot.paramMap)
     this.mealId = parseInt(this.route.snapshot.paramMap.get("mealId"));
-    this.menuId = parseInt(this.route.snapshot.paramMap.get("menuId"));
     this.getMealById();
     this.getImageMeal();
   }
@@ -68,7 +66,7 @@ export class DetailMealComponent implements OnInit {
     console.log(this.meal)
     const orderMeal = {
       quantity: this.quantity,
-      menuId: this.menuId,
+      menuId: null,
       mealId: this.mealId
     }
     this.cart.addToCart(orderMeal)
