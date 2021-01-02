@@ -7,30 +7,14 @@
 <body>
     <h3>Cantinire partie menu</h3>
     <div class="row">
-        <div *ngFor="let menus of listeMenus" class="div">
-            <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header class="expansion_panel">
-                        <img src={{menus.img}} alt="menu img">
-                        <mat-panel-description>
-                            {{menus.label}}
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <div *ngFor="let meal of menus.meals" class="meal" style="cursor: pointer;" [routerLink]="['/menu', menus.id, 'meal', meal.id]">
-                        <mat-grid-list cols="6" rowHeight="100px">
-                            <mat-grid-tile colspan="2" rowspan="1">
-                                <img [src]=meal.img64 alt="meal image"  />
-                            </mat-grid-tile>
-                            <mat-grid-tile colspan="4" rowspan="1">
-                                <p>{{meal.label}}</p>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                    </div>
-                    <br/>
-                </mat-expansion-panel>
-            </mat-accordion>
+            <mat-card class="example-card" *ngFor="let menus of listeMenus" [routerLink]="['/meal', menus.id]">
+                <mat-card-header>
+                  <mat-card-title>{{menus.label}}</mat-card-title>
+                  <mat-card-subtitle>{{menus.priceDF}}€</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src={{menus.img64}} alt="Photo of menu">
+              </mat-card>
         </div>
-    </div>
 </body>
 
 </html>

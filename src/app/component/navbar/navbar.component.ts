@@ -39,7 +39,6 @@ export class NavbarComponent implements OnInit {
       this.isLunchLady = this.currentUser.isLunchLady;
     }
     this.navItems = ROUTES.filter(navItem => navItem);
-    console.log(this.cart)
   }
 
   logout() {
