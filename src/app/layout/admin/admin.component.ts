@@ -10,6 +10,7 @@ import { UserService } from 'src/service/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogBoxCreditComponent } from 'src/app/component/dialog-box-credit/dialog-box-credit.component';
 import { DialogBoxDebitComponent } from 'src/app/component/dialog-box-debit/dialog-box-debit.component';
+import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
 
 
 @Component({
@@ -29,12 +30,18 @@ export class AdminComponent implements OnInit {
   displayedColumns: string[] = ['name', 'firstname', 'wallet', 'id'];
   dataSource = new MatTableDataSource<User>(this.usersTab);
 
+  //Variable Rélesse
+
+  menus = [];
+  panelOpenState = false;
+
   constructor(
     private cantiniere_api: OrderService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private walletService: WalletService,
-    private userService: UserService
+    private userService: UserService,
+    private cantiniere_service : CantiniereServiceService
   ) {
     this.userId = this.route.snapshot.paramMap.get('id');
     this.cantiniere_api.findAll().subscribe((data) => {
@@ -83,6 +90,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.getAllMenus();
   }
 
   /**
@@ -153,6 +161,16 @@ export class AdminComponent implements OnInit {
         })
       }
     })
+  }
+
+  /**
+   * Partie Rélesse (gestion des menus)
+   */
+
+  async getAllMenus() {
+    const response = await this.cantiniere_service.getMenus();
+    this.menus = response;
+    console.log(this.menus);
   }
 
 

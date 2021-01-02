@@ -14,13 +14,14 @@ export class OrderService {
   //headers: any;
   
   constructor(
-    private http:HttpClient, private token_storage: TokenStorageService
-  ) {this.httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token_storage.getToken()
-    })
-  }}
+    private http:HttpClient, private token_storage: TokenStorageService) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token_storage.getToken()
+      })
+    }
+  }
 
   addOrder(cart) {
     console.log(cart)

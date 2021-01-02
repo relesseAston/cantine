@@ -74,5 +74,35 @@
             </div>
         </body>
     </mat-tab>
-    <mat-tab label="gestion menus">Content 3</mat-tab>
+    <mat-tab label="gestion menus">
+        <br/>
+        <a routerLink="/new-menu"><button mat-raised-button color="primary">Add menu</button></a>
+        <a routerLink="/new-meal"><button mat-raised-button color="primary">Add meal</button></a>
+        <a routerLink="/new-ingredient"><button mat-raised-button color="primary">Add ingredient</button></a>
+        <div class="row">
+            <div *ngFor="let menu of menus" class="div">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header class="expansion_panel">
+                            <img src={{menu.img}} alt="menu img">
+                            <mat-panel-description>
+                                {{menu.label}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <!--<div *ngFor="let meal of menus.meals" class="meal" style="cursor: pointer;" [routerLink]="['/menu', menus.id, 'meal', meal.id]">
+                            <mat-grid-list cols="6" rowHeight="100px">
+                                <mat-grid-tile colspan="2" rowspan="1">
+                                    <img [src]=meal.img64 alt="meal image"  />
+                                </mat-grid-tile>
+                                <mat-grid-tile colspan="4" rowspan="1">
+                                    <p>{{meal.label}}</p>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </div>-->
+                        <br/>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </mat-tab>
 </mat-tab-group>

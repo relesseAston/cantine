@@ -33,9 +33,8 @@ export class UserService {
   updateProfile(idUser: number, userForm: any): Promise<any> {
     return this.http.patch<any>(this.api_url+'user/update/'+idUser, userForm, this.httpOptions).toPromise();
   }
-  setInscription(data: any): Observable<any> {
-
+  setInscription(data: any): Promise<any> {
     console.log(data)
-    return this.http.put<any>(this.api_url+'user/register', data);
+    return this.http.put<any>(this.api_url+'user/register', JSON.stringify(data), {headers: {'Content-Type':  'application/json'}}).toPromise();
   }
 }

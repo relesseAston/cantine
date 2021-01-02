@@ -36,6 +36,10 @@ import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
 import { DialogBoxCreditComponent } from './component/dialog-box-credit/dialog-box-credit.component';
 import { DialogBoxDebitComponent } from './component/dialog-box-debit/dialog-box-debit.component';
 import { MatTableModule } from '@angular/material/table';
+import { NewMenuComponent } from './layout/new-menu/new-menu.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NewMealComponent } from './layout/new-meal/new-meal.component';
+import { NewIngredientComponent } from './layout/new-ingredient/new-ingredient.component';
 
 
 
@@ -55,7 +59,10 @@ import { MatTableModule } from '@angular/material/table';
     CartComponent,
     ConfirmDialogComponent,
     DialogBoxCreditComponent,
-    DialogBoxDebitComponent
+    DialogBoxDebitComponent,
+    NewMenuComponent,
+    NewMealComponent,
+    NewIngredientComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +85,8 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatTabsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

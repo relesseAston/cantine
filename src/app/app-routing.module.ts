@@ -9,7 +9,10 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { InscriptionComponent } from './layout/inscription/inscription.component';
 import { ForgotpasswordComponent } from './layout/forgotpassword/forgotpassword.component';
 import { CartComponent } from './layout/cart/cart.component';
-
+import { AuthGuard } from './helpers/auth.guard';
+import { NewMenuComponent } from './layout/new-menu/new-menu.component';
+import { NewMealComponent } from './layout/new-meal/new-meal.component';
+import { NewIngredientComponent } from './layout/new-ingredient/new-ingredient.component';
 
 const routes: Routes = [
   {
@@ -27,11 +30,12 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'inscription',
@@ -42,7 +46,9 @@ const routes: Routes = [
     component: ForgotpasswordComponent },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { lunchLadyRole: true } 
   },
   {
     path: 'menu/:menuId/meal/:mealId',
@@ -52,6 +58,24 @@ const routes: Routes = [
     path: 'cart', 
     component:CartComponent 
   },
+  {
+    path: 'new-menu',
+    component: NewMenuComponent,
+    canActivate: [AuthGuard],
+    data: { lunchLadyRole: true } 
+  },
+  {
+    path: 'new-meal',
+    component: NewMealComponent,
+    canActivate: [AuthGuard],
+    data: { lunchLadyRole: true } 
+  },
+  {
+    path: 'new-ingredient',
+    component: NewIngredientComponent,
+    canActivate: [AuthGuard],
+    data: { lunchLadyRole: true } 
+  }
 ];
 
 @NgModule({
