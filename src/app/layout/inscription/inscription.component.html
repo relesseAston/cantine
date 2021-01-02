@@ -41,9 +41,10 @@
             <label for="town"> Ville</label>
             <input class="form-control" type="text" formControlName="town">
         </div>
-        <div>
-            <label for="image64"> Image</label>
-            <input class="form-control" type="url" formControlName="image64">
+
+        <div formGroupName="image">
+            <label for="imagePath">Image</label>
+            <input class="form-control" type="file" formControlName="imagePath" (change)="handleFileSelect($event)">
         </div>
             <button type="submit" class="btn">Valider</button>
     </form>
