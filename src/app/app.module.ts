@@ -36,6 +36,8 @@ import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
 import { DialogBoxCreditComponent } from './component/dialog-box-credit/dialog-box-credit.component';
 import { DialogBoxDebitComponent } from './component/dialog-box-debit/dialog-box-debit.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 
 
@@ -78,7 +80,8 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatTabsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule
   ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

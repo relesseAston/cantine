@@ -10,6 +10,9 @@ import { UserService } from 'src/service/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogBoxCreditComponent } from 'src/app/component/dialog-box-credit/dialog-box-credit.component';
 import { DialogBoxDebitComponent } from 'src/app/component/dialog-box-debit/dialog-box-debit.component';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -22,6 +25,8 @@ export class AdminComponent implements OnInit {
   commandes: Commande[] = [];
   users: User[] = [];
   userId: any;
+  displayedColumns2: string[] = ['id', 'idUser', 'firstName', 'name', 'creationDate', 'creationTime', 'status', 'action'];
+  dataSource2 = new MatTableDataSource<Commande>(this.commandes_passees);
 
   //Variable Max
 
@@ -39,12 +44,17 @@ export class AdminComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('id');
     this.cantiniere_api.findAll().subscribe((data) => {
       this.commandes_passees = data;
+      this.dataSource2.data = this.commandes_passees;
       console.log(this.commandes_passees);
     });
     this.cantiniere_api.findAllbyUser(this.userId).subscribe((data) => {
       this.commandes = data;
       console.log(this.commandes);
     });
+
+    this.dataSource2.filterPredicate = function(data, filter:string):boolean {
+      return data.user.name.toLowerCase().includes(filter) || data.user.firstname.toLowerCase().includes(filter);
+    }
   }
 
   cancelOrder(id: number) {
@@ -83,6 +93,12 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource2.filter = filterValue;
   }
 
   /**

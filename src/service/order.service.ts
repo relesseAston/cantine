@@ -35,11 +35,11 @@ export class OrderService {
   }
 
   cancel(id: number) {
-    return this.http.patch(ORDER_ROOT + '/cancel/' + id, {});
+    return this.http.patch(ORDER_ROOT + '/cancel/' + id, {}, this.httpOptions);
   }
 
   pay(id: number) {
-    return this.http.patch(ORDER_ROOT + '/deliverandpay/' + id + '/' + 1, {});
+    return this.http.patch(ORDER_ROOT + '/deliverandpay/' + id + '/' + 1, {}, this.httpOptions);
   }
 
 }

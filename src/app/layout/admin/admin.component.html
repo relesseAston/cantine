@@ -4,33 +4,33 @@
     <mat-tab label="partie de Max">
         <div class="user-table">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            
+
                 <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef>Nom (A-Z)</th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <th mat-header-cell *matHeaderCellDef>Nom (A-Z)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                 </ng-container>
-             
+
                 <ng-container matColumnDef="firstname">
-                  <th mat-header-cell *matHeaderCellDef>Prenom</th>
-                  <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+                    <th mat-header-cell *matHeaderCellDef>Prenom</th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
                 </ng-container>
-              
+
                 <ng-container matColumnDef="wallet">
-                  <th mat-header-cell *matHeaderCellDef>Porte-monnaie</th>
-                  <td mat-cell *matCellDef="let element"> 
-                       {{element.wallet | number:'2.2'}}€
+                    <th mat-header-cell *matHeaderCellDef>Porte-monnaie</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.wallet | number:'2.2'}}€
                     </td>
                 </ng-container>
-        
-                <ng-container  matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef></th>
-                  <td mat-cell *matCellDef="let element">
-                      <span class="hidden">{{element.id}}</span>
-                      <button mat-button class='credit' (click)="creditUser(element.id)">Créditer</button>
-                      <button mat-button class='debit' (click)="debitUser(element.id)">Débiter</button>
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="hidden">{{element.id}}</span>
+                        <button mat-button class='credit' (click)="creditUser(element.id)">Créditer</button>
+                        <button mat-button class='debit' (click)="debitUser(element.id)">Débiter</button>
                     </td>
                 </ng-container>
-              
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
@@ -55,8 +55,72 @@
         </body>
     </mat-tab>
     <mat-tab label="gestion commandes">
+        <h2>Récapitulatif des commandes passées</h2>
 
-        <body>
+        <div class="order-table">
+            <span>Filtrer les commandes par utilisateur</span>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Nom ou prénom">
+                </mat-form-field>
+            </form>
+            <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>N° Commande</th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="idUser">
+                    <th mat-header-cell *matHeaderCellDef>N° Utilisateur</th>
+                    <td mat-cell *matCellDef="let element"> {{element.user.id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef>Prénom</th>
+                    <td mat-cell *matCellDef="let element"> {{element.user.firstname}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Nom</th>
+                    <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.creationDate | date:'dd/MM/yyyy'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationTime">
+                    <th mat-header-cell *matHeaderCellDef>Heure</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.creationTime}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Statut commande</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{(element.status == 0 ? "Commande créée" : element.status == 1 ? "Commande validée" : "Commande annulée")}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button class='valider' [disabled]="element.status == 1" (click)="payOrder(element.id)">Valider</button>
+                        <button mat-button class='annuler' [disabled]="element.status == 2" (click)="cancelOrder(element.id)">Annuler</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+            </table>
+        </div>
+
+        <!--<body>
             <h3>Récapitulatif des commandes passées</h3>
             <div class="menus" *ngFor="let commande_passee of commandes_passees">
                 <mat-card class="example-card">
@@ -72,7 +136,7 @@
                     <button [disabled]="commande_passee.status == 1" (click)="payOrder(commande_passee.id)">Valider et payer commande</button><button [disabled]="commande_passee.status == 2" (click)="cancelOrder(commande_passee.id)">Annuler commande</button>
                 </mat-card>
             </div>
-        </body>
+        </body>-->
     </mat-tab>
     <mat-tab label="gestion menus">Content 3</mat-tab>
 </mat-tab-group>

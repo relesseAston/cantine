@@ -1,33 +1,58 @@
 .user-table {
     display: flex;
     justify-content: center;
-  }
-  
-  table {
+}
+
+table {
     width: 70%;
-  }
-  
-  .credit {
+}
+
+.credit {
     background-color: #cccccc61;
     font-size: 0.8em;
-  }
-  
-  .credit:hover {
+}
+
+.credit:hover {
     background-color: #3f51b5;
     color: #fff;
-  }
-  
-  .hidden {
+}
+
+.hidden {
     display: none;
-  }
-  
-  .debit {
+}
+
+.debit {
     background-color: #cccccc61;
     font-size: 0.8em;
     margin-left: 5px;
-  }
-  
-  .debit:hover {
+}
+
+.debit:hover {
     background-color: #dc3545;
     color: #fff;
-  }
+}
+
+.valider {
+    background-color: #cccccc61;
+    font-size: 0.8em;
+}
+
+.valider:hover:enabled {
+    background-color: #3fb545;
+    color: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+.annuler {
+    background-color: #cccccc61;
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+
+.annuler:hover:enabled {
+    background-color: #dc3545;
+    color: #fff;
+}
