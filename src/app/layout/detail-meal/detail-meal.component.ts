@@ -2,23 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
 import { IngredientService } from 'src/service/ingredient.service';
+import { CartComponent } from 'src/app/layout/cart/cart.component';
 
 @Component({
   selector: 'app-detail-meal',
   templateUrl: './detail-meal.component.html',
-  styleUrls: ['./detail-meal.component.css']
+  styleUrls: ['./detail-meal.component.css'],
+  providers: [CartComponent]
 })
 export class DetailMealComponent implements OnInit {
 
   mealId : number;
   meal: any;
   mealImg64: String;
+  quantity = 0;
   panelOpenState = false;
 
-  constructor(private route: ActivatedRoute, private cantiniere_service: CantiniereServiceService, private igrd_service: IngredientService) { }
+  constructor(private route: ActivatedRoute, private cantiniere_service: CantiniereServiceService, private igrd_service: IngredientService, private cart: CartComponent) { }
 
   ngOnInit(): void {
-    this.mealId =+ this.route.snapshot.paramMap.get("id");
+    console.log(this.route.snapshot.paramMap)
+    this.mealId = parseInt(this.route.snapshot.paramMap.get("mealId"));
     this.getMealById();
     this.getImageMeal();
   }
@@ -52,6 +56,20 @@ export class DetailMealComponent implements OnInit {
   async getImageMeal() {
     const response = await this.cantiniere_service.getImageMeal(this.mealId);
     this.mealImg64 = response.image64;
+  }
+
+  changeQuantity(quantity) {
+    if(quantity >= 0) this.quantity = quantity;
+  }
+
+  addToCart() {
+    console.log(this.meal)
+    const orderMeal = {
+      quantity: this.quantity,
+      menuId: null,
+      mealId: this.mealId
+    }
+    this.cart.addToCart(orderMeal)
   }
 
 }

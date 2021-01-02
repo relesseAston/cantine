@@ -1,0 +1,13 @@
+.card {
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.image {
+    width: 100px;
+	height: 100px;
+}
+
+button {
+    margin-left: 10px;
+}

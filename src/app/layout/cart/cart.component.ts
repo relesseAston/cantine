@@ -3,12 +3,11 @@ import { exit } from 'process';
 import { MealService } from 'src/service/meal.service';
 import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
 import { OrderService } from 'src/service/order.service';
+import { TokenStorageService } from 'src/service/token-storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginSnackbarComponent } from 'src/app/component/login-snackbar/login-snackbar.component';
 
-const EMPTY_CART = {
-    "userId" : 1,
-    "constraintId" : 0,
-    "quantity": []
-  };
+const EMPTY_CART = []
 
 @Component({
   selector: 'app-cart',
@@ -21,29 +20,43 @@ export class CartComponent implements OnInit {
   displayedColumns: string[] = ['meal', 'quantity', 'price'];
   cartTable = [];
   menus = [];
+  quantity;
 
   constructor(
     private orderService:OrderService,
     private mealService:MealService,
-    private menuService:CantiniereServiceService 
-  ) { 
+    private menuService:CantiniereServiceService,
+    private token_service:TokenStorageService,
+    private _snackBar: MatSnackBar
+    ) { 
     if (this.cart = {}) this.cart = EMPTY_CART;
     if (localStorage.getItem('cart')) this.cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(this.cart);
     this.fillCartTable()
   }
 
   ngOnInit(): void {
+        if (localStorage.getItem('cart')) this.cart = JSON.parse(localStorage.getItem('cart'));
+
   }
 
   addToCart(menu) {
-    this.cart.quantity.push(menu);
+    this.cart.push(menu)
+    this.quantity = this.quantity +1;
     localStorage.setItem('cart', JSON.stringify(this.cart));
     //this.fillCartTable();
   }
 
-  order(menu) {
-    this.orderService.addOrder(this.cart)
+  order() {
+    if (this.token_service.getUser()) {
+      this.orderService.addOrder({
+        userId: this.token_service.getUser().user.id,
+        constraintId: 0,
+        quantity: this.cart
+      }).subscribe(data => console.log(data))
+    } else {
+      this.openSnackBar();
+    }
+    
   }
 
   resetCart() {
@@ -51,28 +64,28 @@ export class CartComponent implements OnInit {
   }
 
   fillCartTable() {
-    //console.log(this.cart)
-    this.cart.quantity.forEach(row => {
-      this.getMenu(row.menuId).subscribe(
-        menu =>  {
+    console.log(this.cart.length)
+    this.cart.forEach(row => {
+      this.getMeal(row.mealId).subscribe(
+        meal =>  {
           let obj = {
-            id: menu["id"],
-            label: menu["label"],
-            price: menu["priceDF"],
-            quantity: row.quantity,
-            meals: menu["meals"]
+            id: meal["id"],
+            label: meal["label"],
+            price: meal["priceDF"],
+            quantity: row.quantity
           }
-          let found = this.cartTable.find(element => element["id"] == menu["id"]) 
+          let found = this.cartTable.find(element => element["id"] == meal["id"]) 
           //console.log(found)
           if(typeof found === 'undefined') this.cartTable.push(obj)
         
-      })
+      }) 
+      console.log(row)
     })
   }
 
   cartMenuLessQuantity(id) {
     //console.log(this.cart)
-    this.cart.quantity.forEach(row => {
+    this.cart.forEach(row => {
       if (row.menuId == id) {
         row.quantity--;
         localStorage.setItem('cart', JSON.stringify(this.cart));
@@ -89,7 +102,7 @@ export class CartComponent implements OnInit {
   }
 
   cartMenuMoreQuantity(id) {
-    this.cart.quantity.forEach(row => {
+    this.cart.forEach(row => {
       if (row.menuId == id) {
         row.quantity++;
         localStorage.setItem('cart', JSON.stringify(this.cart));
@@ -105,13 +118,19 @@ export class CartComponent implements OnInit {
   }
 
   cartMenuDelete(id) {
-    let newCart = this.cart.quantity.filter(row => row.menuId != id) 
-    this.cart.quantity = newCart
+    let newCart = this.cart.filter(row => row.menuId != id) 
+    this.cart = newCart
 
     let newCartTable = this.cartTable.filter(row => row.id != id)
     this.cartTable = newCartTable;
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(LoginSnackbarComponent, {
+      duration: 20000,
+    });
   }
 
   getMeal(id) {

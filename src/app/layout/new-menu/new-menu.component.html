@@ -1,0 +1,69 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>Nouveau menu</mat-card-title>
+        <mat-card-subtitle>Veuillez entrer un nouveau menu</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+            <form [formGroup]="menuForm">
+                <mat-grid-list cols="4" rowHeight="100px">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>label</mat-label>
+                            <input matInput formControlName="label"/>     
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>description</mat-label>
+                            <textarea matInput formControlName="description"></textarea>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>PriceDF</mat-label>
+                            <input matInput formControlName="priceDF"/>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="2">
+                        <div formGroupName="image">
+                            <div *ngIf="img64">
+                                <img class="image" src="data:image/jpeg;base64,{{img64}}"/>
+                            </div> 
+                            <input class="form-control" type="file" formControlName="imagePath" (change)="handleFileSelect($event)" placeholder="choisir image">
+                        </div>
+                    </mat-grid-tile>
+
+                </mat-grid-list>   
+
+                <div class="div1">
+                    <button class="btn" mat-button (click)="addWeeks()">add weeks</button>
+                    <br/>
+                    <div class="div2" *ngFor="let control of weeks.controls; index as i">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Weeks</mat-label>
+                            <input matInput type="number" [formControl]="weeks.controls[i]" />
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" mat-icon-button color="warn" (click)="removeWeeks(i)"><mat-icon>close</mat-icon></button>
+                        </mat-form-field>                        
+                    </div>
+                </div>
+                
+                <div class="div1">
+                    <button class="btn" mat-button (click)="addMeals()">add menus</button>
+                    <br/>
+                    <div class="div2" *ngFor="let control of idMeals.controls; index as i">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>meal</mat-label>
+                            <mat-select [formControl]="idMeals.controls[i]">
+                                <mat-option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</mat-option>
+                            </mat-select>
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" mat-icon-button color="warn" (click)="removeMeals(i)"><mat-icon>close</mat-icon></button>
+                        </mat-form-field>
+                    </div> 
+                </div>
+            </form>  
+            <button class="valid" mat-button mat-raised-button color="primary" (click)="createMenu()">valider</button>
+    </mat-card-content>
+</mat-card>

@@ -3,15 +3,14 @@
     <input type="email" class="" id="email" formControlName="email" placeholder="Votre adresse e-mail">
     <label for="password">Mot de passe</label>
     <input type="password" class="" id="password"  formControlName="password"  placeholder="Votre mot de passe">
-    <button type="submit" >connexion</button>
+    <div class="text-center mt-5 subscribe">
+        <a [routerLink]="['/forgotpassword']">Mot de passe oublié?</a>
+    </div>
+    
+    <div class="text-center mt-5 subscribe">
+        <a [routerLink]="['/inscription']">Nouveau? Crée un compte</a>
+    </div>
+    <button type="submit" >Connexion</button>
 </form>
-<p>{{isLoggedIn}}</p>
 
 
-<div class="text-center mt-5 subscribe">
-    <a [routerLink]="['/forgotpassword']">Mot de passe oublié</a>
-</div>
-
-<div class="text-center mt-5 subscribe">
-    <a [routerLink]="['/inscription']">Pas encore inscrit ?</a>
-</div>

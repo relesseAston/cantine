@@ -58,7 +58,7 @@
     "no-console": [
       true,
       "debug",
-      "info",
+      "red",
       "time",
       "timeEnd",
       "trace"

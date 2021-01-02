@@ -1,58 +1,35 @@
 <mat-card class="card">
     <mat-card-header>
-        <mat-card-title>Détail du repas</mat-card-title>
-        <mat-card-subtitle>Vous trouvere ci-dessous le détail du repas que vous avez sélectionné</mat-card-subtitle>
+        <mat-card-title>{{meal && meal.label}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-grid-list cols="4" rowHeight="100px">
-
-            <mat-grid-tile colspan="2" rowspan="2">
-                <img class="mealImg" [src]="mealImg64" alt="Photo of meal">
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="2">
-                <h1>{{meal.label}}</h1>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <div class="description">
-            <label><h3><b>Description</b></h3></label>
-            <p>{{meal.description}}</p>
-        </div>
-
-        <div class="ingredient">
-            <div *ngIf="meal.ingredients == undefined">
-                <h3><b>Ingrédients indisponible</b></h3>
-            </div>
-            <div *ngIf="meal.ingredients != undefined">
-                <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState = true"
-                                         (closed)="panelOpenState = false">
+        <div id="meal-order">
+            <img class="mealImg" [src]="mealImg64" alt="Photo of meal"> 
+            <div *ngIf="meal" class="infos">
+                <p>{{meal && meal.description}}</p>
+                <h3><b>Ingredients</b></h3>
+                <ul>
+                    <li *ngFor="let ingredient of meal.ingredients">{{ingredient && ingredient.label}}</li>
+                </ul>
+                <br>
+                <div class="action">
+                    <div>
+                        <mat-icon style="vertical-align:middle;cursor:pointer" (click)="changeQuantity(quantity-1)">keyboard_arrow_down</mat-icon>
+                        <span style="vertical-align:middle">{{ quantity }}</span>
+                        <mat-icon style="vertical-align:middle;cursor:pointer" (click)="changeQuantity(quantity+1)">keyboard_arrow_up</mat-icon>
+                    </div>
+                    <div>
+                        <button mat-raised-button color="primary" (click)="addToCart()">ADD TO CART</button>   
+                    </div>
+                
+                 
+                </div>
                     
-                        <mat-expansion-panel-header>
-                            <mat-panel-description>Ingrédients ({{meal.ingredients.length}})</mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div *ngFor="let ingredient of meal.ingredients">
-                            <mat-grid-list cols="3" rowHeight="100px">
-    
-                                <mat-grid-tile colspan="1" rowspan="2">
-                                    <img [src]="ingredient.img64" alt="Photo of ingredient">
-                                </mat-grid-tile>
-    
-                                <mat-grid-tile colspan="1" rowspan="2">
-                                    <h3>{{ingredient.label}}</h3>
-                                </mat-grid-tile>
-    
-                                <mat-grid-tile colspan="1" rowspan="2">
-                                    <p>{{ingredient.description}}</p>
-                                </mat-grid-tile>
-    
-                            </mat-grid-list>
-                            
-                        </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
             </div>
-        </div>
+            
+        </div>     
+        
+        
         
     </mat-card-content>
 </mat-card>

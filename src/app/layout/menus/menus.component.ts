@@ -11,11 +11,12 @@ export class MenusComponent implements OnInit {
   listeMenus = [];
   panelOpenState = false;
   radioSelected: any;
+  allMenus = [];
 
   constructor(private cantiniere_api : CantiniereServiceService) { }
 
   ngOnInit(): void {
-    this.getWeekMenus();
+    this.getWeekMeals();
   }
 
   async getWeekMenus(){
@@ -30,6 +31,15 @@ export class MenusComponent implements OnInit {
         });
       }
     });
+  }
+
+  async getWeekMeals() {
+    const response = await this.cantiniere_api.getWeekMeal();
+    this.listeMenus = response;
+    console.log(this.listeMenus)
+    this.listeMenus.forEach(element => {
+      this.getImageMealbyId(element.id);
+    })
   }
 
   async getImageMenu(id_menu) {
@@ -54,6 +64,16 @@ export class MenusComponent implements OnInit {
       }
     })
   }
+
+  async getImageMealbyId(id_meal: number) {
+    const response = await this.cantiniere_api.getImageMeal(id_meal);
+    this.listeMenus.forEach(element => {
+          if(element.imageId === response.id){
+            element.img64 = response.image64;
+          }
+        })
+    }
+  
 
   addPanier(id_menu: number) {
     var id_meal = this.radioSelected;

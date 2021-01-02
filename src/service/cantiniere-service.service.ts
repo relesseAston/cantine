@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpEventType, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,23 @@ export class CantiniereServiceService {
 
   api_url = "http://localhost:8080/lunchtime/";
   token ='';
+  httpOptions: any;
   
-  constructor( public http: HttpClient) { }
+  constructor( private http: HttpClient, private token_service: TokenStorageService) { 
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token_service.getToken()
+      })
+    }
+  }
 
   async getMenus(): Promise<any>{
-    return this.http.get<any>(this.api_url+"menu/findall",
-    {
-      headers: new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : this.token
-      })
-    }).toPromise();
+    return this.http.get<any>(this.api_url+"menu/findall", this.httpOptions).toPromise();
+  }
+
+  async addMenu(obj: any) : Promise<any> {
+    return this.http.put<any>(this.api_url+"menu/add", obj, this.httpOptions).toPromise();
   }
 
   async getImageMenus(id_menu : number): Promise<any>{
@@ -32,7 +39,7 @@ export class CantiniereServiceService {
   }
 
   async getWeekMeal(): Promise<any>{
-    return this.http.get<any>(this.api_url+"meal/findallavailablefortoday").toPromise();
+    return this.http.get<any>(this.api_url+"meal/findallavailableforweek/1").toPromise();
   }
 
   async getImageMeal(id_meal: number): Promise<any> {

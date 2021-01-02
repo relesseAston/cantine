@@ -7,42 +7,14 @@
 <body>
     <h3>Cantinire partie menu</h3>
     <div class="row">
-        <div *ngFor="let menus of listeMenus" class="div">
-            <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header class="expansion_panel">
-                        <img src={{menus.img}} alt="menu img">
-                        <mat-panel-description>
-                            {{menus.label}}
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <div *ngFor="let meal of menus.meals" class="meal">
-                        <mat-grid-list cols="9" rowHeight="100px">
-                            <mat-grid-tile colspan="2" rowspan="1">
-                                <img [src]=meal.img64 alt="meal image" [routerLink]="['/detailMeal', meal.id]" style="cursor: pointer;" />
-                            </mat-grid-tile>
-                            <mat-grid-tile colspan="4" rowspan="1">
-                                <p>{{meal.label}}</p>
-                            </mat-grid-tile>
-                            <mat-grid-tile colspan="1" rowspan="1">
-                                <mat-radio-group aria-label="Select an option" [(ngModel)]="radioSelected">
-                                    <mat-radio-button [value]="meal.id"></mat-radio-button>
-                                </mat-radio-group>
-                            </mat-grid-tile>
-                            <mat-grid-tile colspan="2" rowspan="1">
-                                <mat-form-field style="width: 70px;">
-                                    <input matInput [id]="meal.id" type="number" min="1" max=500 value="1">
-                                    <mat-hint align="end">500 max</mat-hint>
-                                </mat-form-field>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                    </div>
-                    <br/>
-                    <button mat-raised-button color="primary" style="float: right;" (click)="addPanier(menus.id)">ajouter au panier</button>
-                </mat-expansion-panel>
-            </mat-accordion>
+            <mat-card class="example-card" *ngFor="let menus of listeMenus" [routerLink]="['/meal', menus.id]">
+                <mat-card-header>
+                  <mat-card-title>{{menus.label}}</mat-card-title>
+                  <mat-card-subtitle>{{menus.priceDF}}€</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src={{menus.img64}} alt="Photo of menu">
+              </mat-card>
         </div>
-    </div>
 </body>
 
 </html>

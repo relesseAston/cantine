@@ -1,0 +1,29 @@
+.card {
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.image {
+    width: 100px;
+	height: 100px;
+}
+
+.div1 {
+    margin-left:70px;
+    margin-bottom: 20px;
+}
+
+.div2 {
+    display: inline;
+    margin: 5px;
+}
+
+.btn {
+    width: 100px;
+    background-color: blue;
+    color: white;
+}
+
+.valid {
+    margin-left: 82px;
+}

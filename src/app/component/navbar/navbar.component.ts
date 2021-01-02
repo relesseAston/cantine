@@ -3,12 +3,12 @@ import { CartComponent } from 'src/app/layout/cart/cart.component';
 import { TokenStorageService } from 'src/service/token-storage.service';
 
 
-declare interface RouteInfo {
+declare interface Routered {
   path: string;
   title: string;
 }
 
-export const ROUTES: RouteInfo[] = [
+export const ROUTES: Routered[] = [
   {path: '/accueil', title: 'Accueil'},
   {path: '/menus', title: 'Menus'},
   {path: '/login', title: 'Login'}
@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private token_service: TokenStorageService,
-    private cart:CartComponent) { }
+    public cart:CartComponent) { }
 
   ngOnInit(): void {
     if(this.token_service.getUser()) {
@@ -44,15 +44,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.token_service.signOut();
     window.location.reload();
-  }
-
-  getCartQuantity() {
-    if(this.cart.cart) {
-      return this.cart.cart.quantity.length;
-    } else {
-      return 0;
-    }
-    
   }
 
 }

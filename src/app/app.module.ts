@@ -38,6 +38,12 @@ import { DialogBoxDebitComponent } from './component/dialog-box-debit/dialog-box
 import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+import { NewMenuComponent } from './layout/new-menu/new-menu.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NewMealComponent } from './layout/new-meal/new-meal.component';
+import { NewIngredientComponent } from './layout/new-ingredient/new-ingredient.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginSnackbarComponent } from './component/login-snackbar/login-snackbar.component';
 
 
 
@@ -57,7 +63,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     CartComponent,
     ConfirmDialogComponent,
     DialogBoxCreditComponent,
-    DialogBoxDebitComponent
+    DialogBoxDebitComponent,
+    NewMenuComponent,
+    NewMealComponent,
+    NewIngredientComponent,
+    LoginSnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +91,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatTabsModule,
     MatDialogModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
