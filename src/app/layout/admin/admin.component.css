@@ -32,6 +32,11 @@ table {
     color: #fff;
 }
 
+.order-table {
+    display: block;
+    justify-content: center;
+}
+
 .valider {
     background-color: #cccccc61;
     font-size: 0.8em;
@@ -40,6 +45,14 @@ table {
 .valider:hover:enabled {
     background-color: #3fb545;
     color: #fff;
+}
+
+.greenStatus {
+    color: green
+}
+
+.redStatus {
+    color: red
 }
 
 .hidden {

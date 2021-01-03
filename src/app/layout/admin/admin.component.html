@@ -101,9 +101,9 @@
                 </ng-container>
 
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef>Statut commande</th>
-                    <td mat-cell *matCellDef="let element">
-                        {{(element.status == 0 ? "Commande créée" : element.status == 1 ? "Commande validée" : "Commande annulée")}}
+                    <th mat-header-cell *matHeaderCellDef>Statut</th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="element.status == 1 ? 'greenStatus' : element.status == 2 ? 'redStatus' : ''">
+                        {{(element.status == 0 ? "Créée" : element.status == 1 ? "Validée" : "Annulée")}}
                     </td>
                 </ng-container>
 
