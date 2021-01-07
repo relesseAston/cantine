@@ -15,7 +15,7 @@ export class DetailMealComponent implements OnInit {
   mealId : number;
   meal: any;
   mealImg64: String;
-  quantity = 0;
+  quantity = 1;
   panelOpenState = false;
 
   constructor(private route: ActivatedRoute, private cantiniere_service: CantiniereServiceService, private igrd_service: IngredientService, private cart: CartComponent) { }
@@ -59,7 +59,7 @@ export class DetailMealComponent implements OnInit {
   }
 
   changeQuantity(quantity) {
-    if(quantity >= 0) this.quantity = quantity;
+    if(quantity > 0) this.quantity = quantity;
   }
 
   addToCart() {

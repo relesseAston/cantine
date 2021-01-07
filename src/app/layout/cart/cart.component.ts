@@ -6,6 +6,8 @@ import { OrderService } from 'src/service/order.service';
 import { TokenStorageService } from 'src/service/token-storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginSnackbarComponent } from 'src/app/component/login-snackbar/login-snackbar.component';
+import { UserService } from 'src/service/user.service';
+import { WalletSnackbarComponent } from 'src/app/component/wallet-snackbar/wallet-snackbar.component';
 
 const EMPTY_CART = []
 
@@ -17,14 +19,17 @@ const EMPTY_CART = []
 export class CartComponent implements OnInit {
 
   cart;
-  displayedColumns: string[] = ['meal', 'quantity', 'price'];
+  displayedColumns: string[] = ['label', 'price', 'quantity', 'del'];
   cartTable = [];
+  cartTotal = 0;
+  userWallet:number;
   menus = [];
   quantity;
 
   constructor(
     private orderService:OrderService,
     private mealService:MealService,
+    private userService:UserService,
     private menuService:CantiniereServiceService,
     private token_service:TokenStorageService,
     private _snackBar: MatSnackBar
@@ -32,6 +37,7 @@ export class CartComponent implements OnInit {
     if (this.cart = {}) this.cart = EMPTY_CART;
     if (localStorage.getItem('cart')) this.cart = JSON.parse(localStorage.getItem('cart'));
     this.fillCartTable()
+    if (this.token_service.getUser()) this.getUserWallet();
   }
 
   ngOnInit(): void {
@@ -48,13 +54,18 @@ export class CartComponent implements OnInit {
 
   order() {
     if (this.token_service.getUser()) {
-      this.orderService.addOrder({
-        userId: this.token_service.getUser().user.id,
-        constraintId: 0,
-        quantity: this.cart
-      }).subscribe(data => console.log(data))
+      if (this.userWallet < this.cartTotal) {
+        this.openSnackBar('no money');
+      } else {
+        this.orderService.addOrder({
+          userId: this.token_service.getUser().user.id,
+          constraintId: 1,
+          quantity: this.cart
+        }).subscribe(data => console.log(data))
+      }
+      
     } else {
-      this.openSnackBar();
+      this.openSnackBar('not log');
     }
     
   }
@@ -64,7 +75,6 @@ export class CartComponent implements OnInit {
   }
 
   fillCartTable() {
-    console.log(this.cart.length)
     this.cart.forEach(row => {
       this.getMeal(row.mealId).subscribe(
         meal =>  {
@@ -79,8 +89,8 @@ export class CartComponent implements OnInit {
           if(typeof found === 'undefined') this.cartTable.push(obj)
         
       }) 
-      console.log(row)
     })
+    this.getTotalPrice();
   }
 
   cartMenuLessQuantity(id) {
@@ -127,10 +137,26 @@ export class CartComponent implements OnInit {
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
-  openSnackBar() {
-    this._snackBar.openFromComponent(LoginSnackbarComponent, {
-      duration: 20000,
-    });
+  openSnackBar(why) {
+    switch (why) {
+      case 'not log':
+        this._snackBar.openFromComponent(LoginSnackbarComponent, {
+          duration: 20000,
+        });
+        break;
+    
+      case 'no money':
+        this._snackBar.openFromComponent(WalletSnackbarComponent, {
+          duration: 20000,
+        });
+        break;
+    }
+    
+  }
+
+  async getUserWallet() {
+    const response = await this.userService.getUserById(this.token_service.getUser().user.id);
+    this.userWallet = response.wallet
   }
 
   getMeal(id) {
@@ -139,6 +165,16 @@ export class CartComponent implements OnInit {
 
   getMenu(id) {
     return this.menuService.findById(id)
+  }
+
+  getTotalPrice() {
+    for (let index = 0; index < this.cart.length; index++) {
+      const element = this.cart[index];
+      this.getMeal(element.mealId).subscribe(meal => {
+        console.log(meal)
+        this.cartTotal = this.cartTotal + meal["priceDF"] * element.quantity
+      })
+    }
   }
 
 }

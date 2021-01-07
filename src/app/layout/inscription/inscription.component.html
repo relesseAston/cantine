@@ -62,19 +62,10 @@
         </div>
         <div>
             <label for="town"> Ville</label>
-<<<<<<< HEAD
-            <input class="form-control" type="text" formControlName="town">
-        </div>
-
-        <div formGroupName="image">
-            <label for="imagePath">Image</label>
-            <input class="form-control" type="file" formControlName="imagePath" (change)="handleFileSelect($event)">
-=======
             <input class="form-control" type="text" name="town" formControlName="town">
             <div class="red" *ngIf="town">
                 {{ town }}
             </div>
->>>>>>> 883260d7f6a3110d57b6166fa9ae53cc846e6a78
         </div>
             <button type="submit" class="btn">Valider</button>
     </form>

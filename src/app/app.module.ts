@@ -44,6 +44,7 @@ import { NewMealComponent } from './layout/new-meal/new-meal.component';
 import { NewIngredientComponent } from './layout/new-ingredient/new-ingredient.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginSnackbarComponent } from './component/login-snackbar/login-snackbar.component';
+import { WalletSnackbarComponent } from './component/wallet-snackbar/wallet-snackbar.component';
 
 
 
@@ -67,7 +68,8 @@ import { LoginSnackbarComponent } from './component/login-snackbar/login-snackba
     NewMenuComponent,
     NewMealComponent,
     NewIngredientComponent,
-    LoginSnackbarComponent
+    LoginSnackbarComponent,
+    WalletSnackbarComponent
   ],
   imports: [
     BrowserModule,
