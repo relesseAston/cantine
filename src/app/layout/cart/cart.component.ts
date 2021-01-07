@@ -95,12 +95,13 @@ export class CartComponent implements OnInit {
 
   cartMenuLessQuantity(id) {
     //console.log(this.cart)
-    this.cart.forEach(row => {
-      if (row.menuId == id) {
+    for (let i = 0; i < this.cart.length; i++) {
+      const row = this.cart[i];
+      if (row.mealId == id) {
         row.quantity--;
         localStorage.setItem('cart', JSON.stringify(this.cart));
       }
-    })
+    }
 
     this.cartTable.forEach(row => {
       if (row.id == id) {
@@ -108,16 +109,19 @@ export class CartComponent implements OnInit {
         row.quantity--;
       }
     })
-    
+
+    this.getTotalPrice()
   }
 
   cartMenuMoreQuantity(id) {
-    this.cart.forEach(row => {
-      if (row.menuId == id) {
+
+    for (let i = 0; i < this.cart.length; i++) {
+      const row = this.cart[i];
+      if (row.mealId == id) {
         row.quantity++;
         localStorage.setItem('cart', JSON.stringify(this.cart));
       }
-    })
+    }
 
     this.cartTable.forEach(row => {
       if (row.id == id) {
@@ -125,6 +129,8 @@ export class CartComponent implements OnInit {
         row.quantity++;
       }
     })
+
+    this.getTotalPrice()
   }
 
   cartMenuDelete(id) {
@@ -168,6 +174,7 @@ export class CartComponent implements OnInit {
   }
 
   getTotalPrice() {
+    this.cartTotal = 0;
     for (let index = 0; index < this.cart.length; index++) {
       const element = this.cart[index];
       this.getMeal(element.mealId).subscribe(meal => {
