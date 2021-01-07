@@ -16,15 +16,25 @@ import { map, startWith } from 'rxjs/operators';
 import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
 import { MealService } from 'src/service/meal.service';
 import { IngredientService } from 'src/service/ingredient.service';
-
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class AdminComponent implements OnInit {
   commandes_passees: Commande[] = [];
+  expandedElement: User | null;
+  todayOrders: Commande[] = [];
+  dataSourceToday = new MatTableDataSource<Commande>(this.todayOrders);
   users: User[] = [];
   userId: any;
   displayedColumns2: string[] = ['id', 'idUser', 'firstName', 'name', 'creationDate', 'creationTime', 'status', 'action'];
@@ -44,7 +54,7 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cantiniere_api: OrderService,
+    private order_service: OrderService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private walletService: WalletService,
@@ -54,15 +64,27 @@ export class AdminComponent implements OnInit {
     private ingredient_service: IngredientService
   ) {
     this.userId = this.route.snapshot.paramMap.get('id');
-    this.cantiniere_api.findAll().subscribe((data) => {
+    this.order_service.findAll().subscribe((data) => {
       this.commandes_passees = data;
-      this.dataSource2.data = this.commandes_passees;
+      //this.dataSource2.data = this.commandes_passees;
       //console.log(this.commandes_passees);
     });
+    this.order_service.findTodayOrders().subscribe(data => {
+      this.todayOrders = data
+      this.dataSourceToday.data = this.todayOrders
+    })
 
     this.dataSource2.filterPredicate = function(data, filter:string):boolean {
       var str1 = data.user.firstname.toLowerCase();
       var str2 = data.user.name.toLowerCase();
+      var str3 = str1.concat(" ", str2);
+      var str4 = str2.concat(" ", str1);
+      return str1.includes(filter) || str2.includes(filter) || str3.includes(filter) || str4.includes(filter);
+    }
+
+    this.dataSource.filterPredicate = function(data, filter:string):boolean {
+      var str1 = data.firstname.toLowerCase();
+      var str2 = data.name.toLowerCase();
       var str3 = str1.concat(" ", str2);
       var str4 = str2.concat(" ", str1);
       return str1.includes(filter) || str2.includes(filter) || str3.includes(filter) || str4.includes(filter);
@@ -78,7 +100,7 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result == 'confirm') {
-        this.cantiniere_api
+        this.order_service
           .cancel(id)
           .subscribe(() => window.location.reload());
           //console.log("Commande n°" + id + " annulée !");
@@ -95,7 +117,7 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result == 'confirm') {
-        this.cantiniere_api
+        this.order_service
           .pay(id)
           .subscribe(() => window.location.reload());
           //console.log("Commande n°" + id + " validée et payée !");
@@ -110,9 +132,15 @@ export class AdminComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource2.filter = filterValue;
+    if(filterValue.length >= 3) {
+      filterValue = filterValue.trim();
+      filterValue = filterValue.toLowerCase();
+      this.dataSource.data = this.usersTab;
+      this.dataSource2.data = this.commandes_passees;
+      this.dataSource2.filter = filterValue;
+      this.dataSource.filter = filterValue;
+    }
+    
   }
 
   /**
@@ -124,7 +152,7 @@ export class AdminComponent implements OnInit {
     const response = await this.userService.getAllUser();
     this.usersTab = response;
     this.usersTab = this.sortUsersByName(this.usersTab);
-    this.dataSource.data = this.usersTab;
+
     /*.subscribe( (data) => {
       this.users = data.body;
       this.users = this.sortUsersByName(this.users);
