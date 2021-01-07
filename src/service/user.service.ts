@@ -41,4 +41,5 @@ export class UserService {
     console.log(data)
     return this.http.put<any>(this.api_url+'user/register', JSON.stringify(data), {headers: {'Content-Type':  'application/json'}});
   }
+
 }

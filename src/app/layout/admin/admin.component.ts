@@ -61,7 +61,11 @@ export class AdminComponent implements OnInit {
     });
 
     this.dataSource2.filterPredicate = function(data, filter:string):boolean {
-      return data.user.name.toLowerCase().includes(filter) || data.user.firstname.toLowerCase().includes(filter);
+      var str1 = data.user.firstname.toLowerCase();
+      var str2 = data.user.name.toLowerCase();
+      var str3 = str1.concat(" ", str2);
+      var str4 = str2.concat(" ", str1);
+      return str1.includes(filter) || str2.includes(filter) || str3.includes(filter) || str4.includes(filter);
     }
   }
 
