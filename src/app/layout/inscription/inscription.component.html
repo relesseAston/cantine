@@ -1,65 +1,65 @@
-<form (ngSubmit)="createUser()"  [formGroup]="inscriptionForm">
+<form (ngSubmit)="createUser()" [formGroup]="inscriptionForm">
     <h1>Inscription</h1>
-        <div>
-            <label for="name">Prénom</label>
-            <input class="form-control" type="text" name="name" formControlName="firstname" required>
-            <div class="red" *ngIf="name">
-                {{ name }}
-            </div>
+    <div>
+        <label for="name">Prénom</label>
+        <input class="form-control" type="text" name="name" formControlName="firstname" required>
+        <div class="red" *ngIf="name">
+            {{ name }}
         </div>
-        <div>
-            <label for="surname">Nom</label>
-            <input class="form-control" type="text" name="surname" formControlName="name" required>
-            <div class="red" *ngIf="surname">
-                {{ surname }}
-            </div>
+    </div>
+    <div>
+        <label for="surname">Nom</label>
+        <input class="form-control" type="text" name="surname" formControlName="name" required>
+        <div class="red" *ngIf="surname">
+            {{ surname }}
         </div>
-        <div>
-            <label for="email">Adresse mail</label>
-            <input class="form-control" type="email"  name="email" formControlName="email" required>
-            <div class="red" *ngIf="email">
-                {{ email }}
-            </div>
+    </div>
+    <div>
+        <label for="email">Adresse mail</label>
+        <input class="form-control" type="email" name="email" formControlName="email" required>
+        <div class="red" *ngIf="email">
+            {{ email }}
         </div>
-        <div>
-            <label for="password"> Mot de passe</label>
-            <input class="form-control" type="password" name="password" formControlName="password" name="password" required>
-            <div class="red" *ngIf="password">
-                {{ password }}
-            </div>
+    </div>
+    <div>
+        <label for="password"> Mot de passe</label>
+        <input class="form-control" type="password" name="password" formControlName="password" name="password" required>
+        <div class="red" *ngIf="password">
+            {{ password }}
         </div>
-        <div>
-            <label for="sexe">Sexe</label>
-            <select class="form-control" formControlName="sex" name="sexe">
+    </div>
+    <div>
+        <label for="sexe">Sexe</label>
+        <select class="form-control" formControlName="sex" name="sexe">
                 <option value="">Choisissez</option>
                 <option value="0">Homme</option>
                 <option value="1">Femme</option>
             </select>
-            <div class="red" *ngIf="sex">
-                {{ sex }}
-            </div>
+        <div class="red" *ngIf="sex">
+            {{ sex }}
         </div>
-        <div>
-            <label for="phone">Numéro de Téléphone </label>
-            <input class="form-control" type="tel" name="phone" formControlName="phone">
-            <div class="red" *ngIf="phone">
-                {{ phone }}
-            </div>
+    </div>
+    <div>
+        <label for="phone">Numéro de Téléphone </label>
+        <input class="form-control" type="tel" name="phone" formControlName="phone">
+        <div class="red" *ngIf="phone">
+            {{ phone }}
         </div>
-        <div>
-            <label for="address"> Adresse</label>
-            <input class="form-control" type="text" name="address" formControlName="address">
-            <div class="red" *ngIf="address">
-                {{ address }}
-            </div>
+    </div>
+    <div>
+        <label for="address"> Adresse</label>
+        <input class="form-control" type="text" name="address" formControlName="address">
+        <div class="red" *ngIf="address">
+            {{ address }}
         </div>
-        <div>
-            <label for="postalCode"> Code postal</label>
-            <input class="form-control" type="number" name="postalCode" formControlName="postalCode">
-            <div class="red" *ngIf="postalCode">
-                {{ postalCode }}
-            </div>
+    </div>
+    <div>
+        <label for="postalCode"> Code postal</label>
+        <input class="form-control" type="number" name="postalCode" formControlName="postalCode">
+        <div class="red" *ngIf="postalCode">
+            {{ postalCode }}
         </div>
+<<<<<<< HEAD
         <div>
             <label for="town"> Ville</label>
             <input class="form-control" type="text" name="town" formControlName="town">
@@ -69,3 +69,15 @@
         </div>
             <button type="submit" class="btn">Valider</button>
     </form>
+=======
+    </div>
+    <div>
+        <label for="town"> Ville</label>
+        <input class="form-control" type="text" name="town" formControlName="town">
+        <div class="red" *ngIf="town">
+            {{ town }}
+        </div>
+    </div>
+    <button type="submit" class="btn">Valider</button>
+</form>
+>>>>>>> cf37ac6c26a1b7cc222600089dfcd1840eacadd8
