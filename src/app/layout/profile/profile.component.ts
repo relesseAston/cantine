@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from 'src/service/token-storage.service';
 import { UserService } from 'src/service/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { OrderService } from 'src/service/order.service';
+import { Commande } from 'src/app/models/Commande';
 
 @Component({
   selector: 'app-profile',
@@ -10,34 +12,61 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
+  id_user: any;
   currentUser: any;
   readonly : Boolean = true;
   userForm: FormGroup;
-  name: String;
+  /*name: String;
   firstname: String;
   email: String;
   phone: String;
   address: String;
   postalCode: String;
-  town: String;
+  town: String;*/
+  commandes: Commande[] = [];
+  panelOpenState = false;
 
-  constructor(private fb: FormBuilder, private token_service: TokenStorageService, private user_service: UserService) { }
-
-  ngOnInit(): void {
-    this.currentUser = this.token_service.getUser().user;
-    console.log(this.currentUser);
-    this.getUserImg();
-    this.generateUserForm();
+  constructor(private fb: FormBuilder, private order_service: OrderService, private user_service: UserService, private route: ActivatedRoute) { 
+    this.id_user =+ this.route.snapshot.paramMap.get('idUser');
   }
 
-  async getUserImg() {
-    var id_user: number = this.currentUser.id;
+  ngOnInit(): void {
+    this.getUserById(this.id_user);
+    this.generateUserForm();
+    this.recapOrder(this.id_user);
+  }
+
+  async getUserById(id_user : number) {
+    const response = await this.user_service.getUserById(id_user);
+    this.currentUser = response;
+    console.log(this.currentUser);
+    this.getUserImg(id_user);
+  }
+
+  async getUserImg(id_user:number) {
     const response = await this.user_service.getImgUser(id_user);
     this.currentUser.image64 = response.image64;
+    this.patchValue();
   }
 
   generateUserForm() {
     this.userForm = this.fb.group({
+      name: [''],
+      firstname: [''],
+      email: [''],
+      phone: [''],
+      address: [''],
+      postalCode: [''],
+      town: [''],
+      wallet: [''],
+      password: [''],
+      sex: [''],
+      isLunchLady: [''],
+    });
+  }
+
+  patchValue() {
+    this.userForm.setValue({
       name: [this.currentUser.name],
       firstname: [this.currentUser.firstname],
       email: [this.currentUser.email],
@@ -49,7 +78,7 @@ export class ProfileComponent implements OnInit {
       password: [''],
       sex: [this.currentUser.sex],
       isLunchLady: [this.currentUser.isLunchLady],
-    });
+    })
   }
 
   readonlyOn() {
@@ -70,6 +99,14 @@ export class ProfileComponent implements OnInit {
     .catch(err => {
       console.log('err', err);
     });
+  }
+
+  recapOrder(id_user: number) {
+    this.order_service.findAllbyUser(id_user)
+    .subscribe(data => {
+      this.commandes = data;
+      console.log(data);
+    })
   }
 
 

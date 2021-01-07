@@ -84,6 +84,26 @@
                 </mat-grid-tile>
             </form>
         </mat-grid-list>
-         
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header class="expansion_panel">
+                    <mat-panel-description>
+                        commande passées ({{commandes.length}})
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let commande of commandes">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <mat-card-title>Commande n°{{commande.id}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>Commande {{(commande.status == 0 ? "créée" : commande.status == 1 ? "validée" : "annulée")}}</p>
+                            <p>Effectuée le {{commande.creationDate | date:'dd/MM/yyyy'}} à {{commande.creationTime}}</p>
+                        </mat-card-content>
+                        <!--<button [disabled]="commande.status == 1" (click)="payOrder(commande.id)">Valider et payer commande</button><button [disabled]="commande.status == 2" (click)="cancelOrder(commande.id)">Annuler commande</button>-->
+                    </mat-card>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
     </mat-card-content>
 </mat-card>

@@ -13,6 +13,8 @@ import { AuthGuard } from './helpers/auth.guard';
 import { NewMenuComponent } from './layout/new-menu/new-menu.component';
 import { NewMealComponent } from './layout/new-meal/new-meal.component';
 import { NewIngredientComponent } from './layout/new-ingredient/new-ingredient.component';
+import { ModifMenuComponent } from './layout/modif-menu/modif-menu.component';
+import { ModifMealComponent } from './layout/modif-meal/modif-meal.component';
 
 const routes: Routes = [
   {
@@ -33,7 +35,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'profile',
+    path: 'profile/:idUser',
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
@@ -73,6 +75,18 @@ const routes: Routes = [
   {
     path: 'new-ingredient',
     component: NewIngredientComponent,
+    canActivate: [AuthGuard],
+    data: { lunchLadyRole: true } 
+  },
+  {
+    path: 'modif-menu/:menuId',
+    component: ModifMenuComponent,
+    canActivate: [AuthGuard],
+    data: { lunchLadyRole: true } 
+  },
+  {
+    path: 'modif-meal/:mealId',
+    component: ModifMealComponent,
     canActivate: [AuthGuard],
     data: { lunchLadyRole: true } 
   }

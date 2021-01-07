@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderService } from '../../../service/order.service';
 import { Commande } from '../../models/Commande';
@@ -14,6 +14,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
+import { MealService } from 'src/service/meal.service';
+import { IngredientService } from 'src/service/ingredient.service';
 
 
 @Component({
@@ -23,7 +25,6 @@ import { CantiniereServiceService } from 'src/service/cantiniere-service.service
 })
 export class AdminComponent implements OnInit {
   commandes_passees: Commande[] = [];
-  commandes: Commande[] = [];
   users: User[] = [];
   userId: any;
   displayedColumns2: string[] = ['id', 'idUser', 'firstName', 'name', 'creationDate', 'creationTime', 'status', 'action'];
@@ -38,25 +39,25 @@ export class AdminComponent implements OnInit {
   //Variable Rélesse
 
   menus = [];
+  meals = [];
   panelOpenState = false;
 
   constructor(
+    private router: Router,
     private cantiniere_api: OrderService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private walletService: WalletService,
     private userService: UserService,
-    private cantiniere_service : CantiniereServiceService
+    private cantiniere_service : CantiniereServiceService,
+    private meal_service: MealService,
+    private ingredient_service: IngredientService
   ) {
     this.userId = this.route.snapshot.paramMap.get('id');
     this.cantiniere_api.findAll().subscribe((data) => {
       this.commandes_passees = data;
       this.dataSource2.data = this.commandes_passees;
-      console.log(this.commandes_passees);
-    });
-    this.cantiniere_api.findAllbyUser(this.userId).subscribe((data) => {
-      this.commandes = data;
-      console.log(this.commandes);
+      //console.log(this.commandes_passees);
     });
 
     this.dataSource2.filterPredicate = function(data, filter:string):boolean {
@@ -76,7 +77,7 @@ export class AdminComponent implements OnInit {
         this.cantiniere_api
           .cancel(id)
           .subscribe(() => window.location.reload());
-        // console.log("Commande n°" + id + " annulée !");
+          //console.log("Commande n°" + id + " annulée !");
       }
     });
   }
@@ -93,7 +94,7 @@ export class AdminComponent implements OnInit {
         this.cantiniere_api
           .pay(id)
           .subscribe(() => window.location.reload());
-        // console.log("Commande n°" + id + " validée et payée !");
+          //console.log("Commande n°" + id + " validée et payée !");
       }
     });
   }
@@ -101,6 +102,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     this.getAllMenus();
+    this.getAllMeals();
   }
 
   applyFilter(filterValue: string) {
@@ -186,7 +188,87 @@ export class AdminComponent implements OnInit {
   async getAllMenus() {
     const response = await this.cantiniere_service.getMenus();
     this.menus = response;
-    console.log(this.menus);
+    this.menus.forEach(element => {
+      this.getImageMenu(element.id);
+      if(element.meals) {
+        element.meals.forEach(element_meal => {
+          this.getImageMeal(element_meal.id);
+        });
+      }
+    })
+  }
+
+  async getImageMenu(id_menu) {
+    const response = await this.cantiniere_service.getImageMenus(id_menu);
+    this.menus.forEach(element => {
+      if(element.imageId === response.id){
+        element.img = response.image64;
+      }
+    });
+    
+  }
+
+  async getImageMeal(id_meal: number) {
+    const response = await this.cantiniere_service.getImageMeal(id_meal);
+    this.menus.forEach(element => {
+      if(element.meals) {
+        element.meals.forEach(element_meal => {
+          if(element_meal.imageId === response.id){
+            element_meal.img64 = response.image64;
+          }
+        });
+      }
+    })
+  }
+
+  modifMenu(menuId: number) {
+    this.router.navigateByUrl('modif-menu/'+menuId);
+  }
+
+  modifMeal(mealId: number) {
+    this.router.navigateByUrl('modif-meal/'+mealId);
+  }
+
+  voirProfil(id_user) {
+    this.router.navigateByUrl('profile/'+id_user);
+  }
+
+  async getAllMeals() {
+    const response = await this.meal_service.findAll();
+    this.meals = response;
+    this.meals.forEach(element => {
+      this.imageMeal(element.id);
+      if(element.ingredients){
+        element.ingredients.forEach(element_igrd => {
+          this.getIgrdImage(element_igrd.id);
+        })
+      } 
+    })
+
+
+  }
+
+  async imageMeal(id_meal) {
+    const response = await this.cantiniere_service.getImageMeal(id_meal);
+    this.meals.forEach(element => {
+      if(element.imageId === response.id){
+        element.img = response.image64;
+      }
+    });
+
+  }
+
+  async getIgrdImage(id_igrd) {
+    const response = await this.ingredient_service.getIgrdImage(id_igrd);
+    this.meals.forEach(element => {
+      if(element.ingredients) {
+        element.ingredients.forEach(element_igrd => {
+          if(element_igrd.imageId === response.id) {
+            element_igrd.img64 = response.image64;
+          }
+        })
+      }
+    })
   }
 
 

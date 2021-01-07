@@ -25,6 +25,10 @@ export class UserService {
     return this.http.get<User>(this.api_url+'user/findall', this.httpOptions).toPromise();
   }
 
+  async getUserById(id:number): Promise<any> {
+    return this.http.get<any>(this.api_url + 'user/find/'+id, this.httpOptions).toPromise();
+  }
+
   async getImgUser(id_user: number): Promise<any> {
     //console.log(this.httpOptions);
     return this.http.get<any>(this.api_url+'user/findimg/'+id_user, this.httpOptions).toPromise();

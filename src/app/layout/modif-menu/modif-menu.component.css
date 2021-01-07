@@ -1,0 +1,19 @@
+.btn {
+    width: 100px;
+    background-color: blue;
+    color: white;
+}
+
+.valid {
+    margin-left: 82px;
+}
+
+.div1 {
+    margin-left:70px;
+    margin-bottom: 20px;
+}
+
+.div2 {
+    display: inline;
+    margin: 5px;
+}

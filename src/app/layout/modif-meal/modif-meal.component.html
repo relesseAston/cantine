@@ -1,0 +1,79 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>Modification meal</mat-card-title>
+        <mat-card-subtitle>Veuillez modifier ce meal</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="mealForm">
+            <mat-grid-list cols="5" rowHeight="100px">
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>label</mat-label>
+                        <input matInput formControlName="label"/>     
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>PriceDF</mat-label>
+                        <input matInput formControlName="priceDF"/>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <!--<mat-grid-tile colspan="1" rowspan="2">
+                    <div formGroupName="image">
+                        <div *ngIf="img64">
+                            <img class="image" src="data:image/jpeg;base64,{{img64}}"/>
+                        </div> 
+                        <input class="form-control" type="file" formControlName="imagePath" (change)="handleFileSelect($event)" placeholder="choisir image">
+                    </div>
+                </mat-grid-tile>-->
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Week</mat-label>
+                        <textarea matInput formControlName="availableForWeeks"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Category</mat-label>
+                        <input matInput type="number" formControlName="category"/>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+            <div class="div1">
+                <div *ngIf="current_igrd">
+                    <div *ngFor="let igrdid of current_igrd" style="display: inline; margin: 10px;">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Meal</mat-label>
+                            <input matInput type="text" [value]="igrdid.label"  [readonly]="true"/>
+                        </mat-form-field>
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" mat-icon-button color="warn" (click)="deleteCurrentIgrd(igrdid.id)"><mat-icon>close</mat-icon></button>
+                    </div>
+                </div>
+                <button class="btn" mat-button (click)="addIgrds()">add igrds</button>
+                <br/>
+                <div class="div2" *ngFor="let control of idIgrds.controls; index as i">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>ingredient</mat-label>
+                        <mat-select [formControl]="idIgrds.controls[i]">
+                            <mat-option *ngFor="let igrd of igrds" [value]="igrd.id">{{igrd.label}}</mat-option>
+                        </mat-select>
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" mat-icon-button color="warn" (click)="removeIgrds(i)"><mat-icon>close</mat-icon></button>
+                    </mat-form-field>
+                </div> 
+            </div>
+        </form>
+        <button class="valid" mat-button mat-raised-button color="primary" (click)="modifMeal()">valider</button>
+    </mat-card-content>
+</mat-card>

@@ -64,3 +64,11 @@ table {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: dense;
 }
+
+.expansion_panel {
+    height: 200px !important;
+}
+
+.modif {
+    float:right;
+}

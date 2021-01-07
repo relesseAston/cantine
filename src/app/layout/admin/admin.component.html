@@ -1,7 +1,7 @@
 <p>admin works!</p>
 
 <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="partie de Max">
+    <mat-tab label="gestion utilisateurs">
         <div class="user-table">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -28,6 +28,7 @@
                         <span class="hidden">{{element.id}}</span>
                         <button mat-button class='credit' (click)="creditUser(element.id)">Créditer</button>
                         <button mat-button class='debit' (click)="debitUser(element.id)">Débiter</button>
+                        <button mat-button (click)="voirProfil(element.id)">Profil</button>
                     </td>
                 </ng-container>
 
@@ -35,24 +36,6 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </div>
-    </mat-tab>
-    <mat-tab label="gestion utilisateurs">
-
-        <body>
-            <h3>Récapitulatif des commandes passées par l'utilisateur n°{{userId}}</h3>
-            <div class="menus" *ngFor="let commande of commandes">
-                <mat-card class="example-card">
-                    <mat-card-header>
-                        <mat-card-title>Commande n°{{commande.id}}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <p>Commande {{(commande.status == 0 ? "créée" : commande.status == 1 ? "validée" : "annulée")}}</p>
-                        <p>Effectuée le {{commande.creationDate | date:'dd/MM/yyyy'}} à {{commande.creationTime}}</p>
-                    </mat-card-content>
-                    <button [disabled]="commande.status == 1" (click)="payOrder(commande.id)">Valider et payer commande</button><button [disabled]="commande.status == 2" (click)="cancelOrder(commande.id)">Annuler commande</button>
-                </mat-card>
-            </div>
-        </body>
     </mat-tab>
     <mat-tab label="gestion commandes">
         <h2>Récapitulatif des commandes passées</h2>
@@ -119,30 +102,10 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
             </table>
         </div>
-
-        <!--<body>
-            <h3>Récapitulatif des commandes passées</h3>
-            <div class="menus" *ngFor="let commande_passee of commandes_passees">
-                <mat-card class="example-card">
-                    <mat-card-header>
-                        <mat-card-title>Commande n°{{commande_passee.id}}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <p>Commande {{(commande_passee.status == 0 ? "créée" : commande_passee.status == 1 ? "validée" : "annulée")}}</p>
-                        <p>Effectuée par l'utilisateur n°{{commande_passee.user.id}}</p>
-                        <p>({{commande_passee.user.firstname}} {{commande_passee.user.name | uppercase}})</p>
-                        <p>le {{commande_passee.creationDate | date:'dd/MM/yyyy'}} à {{commande_passee.creationTime}}</p>
-                    </mat-card-content>
-                    <button [disabled]="commande_passee.status == 1" (click)="payOrder(commande_passee.id)">Valider et payer commande</button><button [disabled]="commande_passee.status == 2" (click)="cancelOrder(commande_passee.id)">Annuler commande</button>
-                </mat-card>
-            </div>
-        </body>-->
     </mat-tab>
     <mat-tab label="gestion menus">
         <br/>
         <a routerLink="/new-menu"><button mat-raised-button color="primary">Add menu</button></a>
-        <a routerLink="/new-meal"><button mat-raised-button color="primary">Add meal</button></a>
-        <a routerLink="/new-ingredient"><button mat-raised-button color="primary">Add ingredient</button></a>
         <div class="row">
             <div *ngFor="let menu of menus" class="div">
                 <mat-accordion>
@@ -153,7 +116,9 @@
                                 {{menu.label}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <!--<div *ngFor="let meal of menus.meals" class="meal" style="cursor: pointer;" [routerLink]="['/menu', menus.id, 'meal', meal.id]">
+                        <button class="modif" mat-button mat-raised-button color="primary" (click)="modifMenu(menu.id)">Modifier</button>
+                        <br/>
+                        <div *ngFor="let meal of menu.meals" class="meal">
                             <mat-grid-list cols="6" rowHeight="100px">
                                 <mat-grid-tile colspan="2" rowspan="1">
                                     <img [src]=meal.img64 alt="meal image"  />
@@ -162,8 +127,40 @@
                                     <p>{{meal.label}}</p>
                                 </mat-grid-tile>
                             </mat-grid-list>
-                        </div>-->
+                        </div>
                         <br/>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="gestion meals">
+        <br/>
+        <a routerLink="/new-meal"><button mat-raised-button color="primary">Add meal</button></a>
+        <a routerLink="/new-ingredient"><button mat-raised-button color="primary">Add ingredient</button></a>
+
+        <div class="row">
+            <div *ngFor="let meal of meals" class="div">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header class="expansion_panel">
+                            <img src={{meal.img}} alt="meal img">
+                            <mat-panel-description>
+                                {{meal.label}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <button class="modif" mat-button mat-raised-button color="primary" (click)="modifMeal(meal.id)">Modifier</button>
+                        <br/>
+                        <div *ngFor="let igrd of meal.ingredients" class="meal">
+                            <mat-grid-list cols="6" rowHeight="100px">
+                                <mat-grid-tile colspan="2" rowspan="1">
+                                    <img [src]=igrd.img64 alt="igrd image"  />
+                                </mat-grid-tile>
+                                <mat-grid-tile colspan="4" rowspan="1">
+                                    <p>{{igrd.label}}</p>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </div>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>

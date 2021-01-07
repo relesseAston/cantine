@@ -31,4 +31,8 @@ export class MealService {
   async addMeal(obj: any): Promise<any> {
     return this.http.put<any>(API_ROOT + 'add', obj, this.httpOptions).toPromise();
   }
+
+  async updateMeal(id:number, obj: any): Promise<any> {
+    return this.http.patch<any>(API_ROOT + 'update/'+id, obj, this.httpOptions).toPromise();
+  }
 }

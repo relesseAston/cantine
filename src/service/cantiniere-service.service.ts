@@ -53,5 +53,13 @@ export class CantiniereServiceService {
   findById(id:number) {
     return this.http.get(this.api_url + 'menu/find/' + id);
   }
+
+  async getMenuById(id:number): Promise<any> {
+    return this.http.get(this.api_url + 'menu/find/' + id).toPromise();
+  }
+
+  async updateMenu(id:number, obj: any): Promise<any> {
+    return this.http.patch<any>(this.api_url + 'menu/update/'+id, obj, this.httpOptions).toPromise();
+  }
   
 }
