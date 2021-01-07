@@ -18,7 +18,7 @@
     color: black;
 } */
 
-span {
+span, button {
     margin: 0 2% 0 0;
     cursor: pointer;
 }
@@ -26,3 +26,15 @@ span {
 .example-spacer {
     flex: 1 1 auto;
   }
+
+#wallet {
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    align-items: center;
+}
+
+#wallet p {
+    vertical-align: middle;
+    margin: 0 0 0 2%;
+}

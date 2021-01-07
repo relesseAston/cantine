@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    window.location.assign('/accueil');
+    window.location.replace("/accueil");
   }
 
 
