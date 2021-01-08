@@ -178,12 +178,20 @@
                 <mat-accordion>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header class="expansion_panel">
-                            <img src={{menu.img}} alt="menu img">
+                            <img *ngIf="!changeImageMenu" src={{menu.img}} alt="menu img">
+                            <img *ngIf="changeImageMenu" src="data:image/jpeg;base64,{{img64}}"/>
                             <mat-panel-description>
                                 {{menu.label}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <button class="modif" mat-button mat-raised-button color="primary" (click)="modifMenu(menu.id)">Modifier</button>
+                        <br/>
+                        <div style="float: right;">
+                            <input  *ngIf="!changeImageMenu" type="file" style="float: right;" (change)="handleFileSelect($event)"/>
+                            <button *ngIf="changeImageMenu" mat-raised-button color="primary" type="button" (click)="modifierImage(menu.id,'menu')">modifier</button>
+                            <button *ngIf="changeImageMenu" mat-raised-button color="primary" type="button" (click)="annulerImage('menu')">annuler</button>
+                        </div>
+                        <br/>
                         <br/>
                         <div *ngFor="let meal of menu.meals" class="meal">
                             <mat-grid-list cols="6" rowHeight="100px">
@@ -211,12 +219,20 @@
                 <mat-accordion>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header class="expansion_panel">
-                            <img src={{meal.img}} alt="meal img">
+                            <img *ngIf="!changeImageMeal" src={{meal.img}} alt="meal img">
+                            <img *ngIf="changeImageMeal" src="data:image/jpeg;base64,{{img64}}"/>
                             <mat-panel-description>
                                 {{meal.label}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <button class="modif" mat-button mat-raised-button color="primary" (click)="modifMeal(meal.id)">Modifier</button>
+                        <br/>
+                        <div style="float: right;">
+                            <input  *ngIf="!changeImageMeal" type="file" style="float: right;" (change)="handleFileSelectMeal($event)"/>
+                            <button *ngIf="changeImageMeal" mat-raised-button color="primary" type="button" (click)="modifierImage(meal.id,'meal')">modifier</button>
+                            <button *ngIf="changeImageMeal" mat-raised-button color="primary" type="button" (click)="annulerImage('meal')">annuler</button>
+                        </div>
+                        <br/>
                         <br/>
                         <div *ngFor="let igrd of meal.ingredients" class="meal">
                             <mat-grid-list cols="6" rowHeight="100px">

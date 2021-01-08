@@ -77,9 +77,9 @@ table {
     height: 200px !important;
 }
 
-.modif {
+/*.modif {
     float:right;
-}
+}*/
 
 tr.example-detail-row {
     height: 0;
@@ -123,4 +123,9 @@ tr.example-detail-row {
   
   .example-element-description-attribution {
     opacity: 0.5;
+  }
+
+  img {
+      width: 100px;
+      height: 100px;
   }
