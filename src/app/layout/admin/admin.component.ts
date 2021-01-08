@@ -51,6 +51,10 @@ export class AdminComponent implements OnInit {
   menus = [];
   meals = [];
   panelOpenState = false;
+  changeImageMenu = false;
+  changeImageMeal = false;
+  imagePath;
+  img64 : any;
 
   constructor(
     private router: Router,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/service/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from 'src/service/order.service';
 import { Commande } from 'src/app/models/Commande';
+import { TokenStorageService } from 'src/service/token-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,9 @@ import { Commande } from 'src/app/models/Commande';
 })
 export class ProfileComponent implements OnInit {
 
+  imagePath;
+  changeImage = false;
+  img64 : any;
   id_user: any;
   currentUser: any;
   readonly : Boolean = true;
@@ -26,11 +30,15 @@ export class ProfileComponent implements OnInit {
   commandes: Commande[] = [];
   panelOpenState = false;
 
-  constructor(private fb: FormBuilder, private order_service: OrderService, private user_service: UserService, private route: ActivatedRoute) { 
+  constructor(private fb: FormBuilder, private order_service: OrderService, private user_service: UserService, private route: ActivatedRoute, private router: Router, private token_service: TokenStorageService) { 
     this.id_user =+ this.route.snapshot.paramMap.get('idUser');
   }
 
   ngOnInit(): void {
+    let user = this.token_service.getUser().user
+    if(!user.isLunchLady && user.id != this.id_user) {
+      window.location.replace("accueil");
+    }
     this.getUserById(this.id_user);
     this.generateUserForm();
     this.recapOrder(this.id_user);
@@ -107,6 +115,47 @@ export class ProfileComponent implements OnInit {
       this.commandes = data;
       console.log(data);
     })
+  }
+
+  handleFileSelect($event) {
+    this.imagePath = $event.target.value;
+    var files = $event.target.files;
+    var file = files[0];
+
+    if (files && file) {
+        var reader = new FileReader();
+
+        reader.onload =this._handleReaderLoaded.bind(this);
+
+        reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.img64= btoa(binaryString);
+    this.changeImage = true
+  }
+
+  async modifierImage() {
+    var obj = {
+      imagePath: this.imagePath,
+      image64: "data:image/jpeg;base64,"+this.img64
+    }
+    console.log(obj);
+
+    return this.user_service.updateImage(JSON.stringify(obj), this.id_user)
+    .then(res => {
+      console.log("res", res);
+    })
+    .catch(err => {
+      console.log("err", err);
+    })
+
+  }
+
+  annulerImage() {
+    this.changeImage = false;
   }
 
 
