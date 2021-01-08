@@ -39,7 +39,7 @@ export class CantiniereServiceService {
   }
 
   async getWeekMeal(): Promise<any>{
-    return this.http.get<any>(this.api_url+"meal/findallavailableforweek/1").toPromise();
+    return this.http.get<any>(this.api_url+"meal/findallavailablefortoday").toPromise();
   }
 
   async getImageMeal(id_meal: number): Promise<any> {
