@@ -134,13 +134,15 @@ export class CartComponent implements OnInit {
   }
 
   cartMenuDelete(id) {
-    let newCart = this.cart.filter(row => row.menuId != id) 
+    let newCart = this.cart.filter(row => row.mealId != id) 
     this.cart = newCart
 
     let newCartTable = this.cartTable.filter(row => row.id != id)
     this.cartTable = newCartTable;
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
+
+    this.getTotalPrice()
   }
 
   openSnackBar(why) {
