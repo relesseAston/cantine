@@ -37,6 +37,7 @@ import { DialogBoxCreditComponent } from './component/dialog-box-credit/dialog-b
 import { DialogBoxDebitComponent } from './component/dialog-box-debit/dialog-box-debit.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { NewMenuComponent } from './layout/new-menu/new-menu.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -99,7 +100,8 @@ import { WalletSnackbarComponent } from './component/wallet-snackbar/wallet-snac
     MatTableModule,
     MatAutocompleteModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

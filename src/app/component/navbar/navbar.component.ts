@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
 
   currentUser: any;
   isLunchLady: Boolean;
+  panelOpenState = false;
 
   navItems: any[];
 
