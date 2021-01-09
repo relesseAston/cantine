@@ -12,7 +12,7 @@ export class AppComponent {
   today = new Date();
   weekNumber : number;
 
-  constructor(private cantiniere_api : CantiniereServiceService){ }
+  constructor(){ }
 
   ngOnInit(){
     

@@ -7,7 +7,7 @@
         <mat-grid-list cols="4" rowHeight="100px">
             <form [formGroup]="userForm">
                 <mat-grid-tile colspan="1" rowspan="3">
-                    <img [src]="currentUser.image64"/>
+                    <img [src]="currentUser && currentUser.image64"/>
                 </mat-grid-tile>
     
                 <mat-grid-tile colspan="1" rowspan="1">

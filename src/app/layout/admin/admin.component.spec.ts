@@ -1,6 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AdminComponent } from './admin.component';
+import { MatTableModule } from '@angular/material/table';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderService } from 'src/service/order.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { WalletService } from 'src/service/wallet.service';
+import { UserService } from 'src/service/user.service';
+import { CantiniereServiceService } from 'src/service/cantiniere-service.service';
+import { MealService } from 'src/service/meal.service';
+import { IngredientService } from 'src/service/ingredient.service';
+import { Overlay } from '@angular/cdk/overlay';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -8,7 +20,17 @@ describe('AdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminComponent ]
+      declarations: [ AdminComponent ],
+      imports: [MatTableModule, MatDialogModule ],
+      providers: [ HttpClient, HttpHandler, {provide: Router, useValue: {}}, {provide: ActivatedRoute, useValue: {
+          snapshot: {
+            paramMap: {
+              get: () => 1, // represents the bookId
+            },
+          }
+        }
+      }, OrderService, MatDialog, WalletService, UserService, CantiniereServiceService, MealService, IngredientService, Overlay ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));
