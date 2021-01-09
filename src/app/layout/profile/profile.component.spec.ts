@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { OrderService } from 'src/service/order.service';
 import { UserService } from 'src/service/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -15,7 +15,7 @@ describe('ProfileComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProfileComponent ],
-      providers: [ FormBuilder, HttpClient, HttpHandler, OrderService, UserService, {provide: ActivatedRoute, useValue: {
+      providers: [ Router ,FormBuilder, HttpClient, HttpHandler, OrderService, UserService, {provide: ActivatedRoute, useValue: {
         snapshot: {
           paramMap: {
             get: () => 1, // represents the UserId
