@@ -61,5 +61,9 @@ export class CantiniereServiceService {
   async updateMenu(id:number, obj: any): Promise<any> {
     return this.http.patch<any>(this.api_url + 'menu/update/'+id, obj, this.httpOptions).toPromise();
   }
+
+  async updateMenuImage(id: number, obj:any): Promise<any> {
+    return this.http.patch<any>(this.api_url + 'menu/updateimg/'+id, obj, this.httpOptions).toPromise();
+  }
   
 }

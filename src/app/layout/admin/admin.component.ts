@@ -51,6 +51,10 @@ export class AdminComponent implements OnInit {
   menus = [];
   meals = [];
   panelOpenState = false;
+  changeImageMenu = false;
+  changeImageMeal = false;
+  imagePath;
+  img64 : any;
 
   constructor(
     private router: Router,
@@ -301,6 +305,86 @@ export class AdminComponent implements OnInit {
         })
       }
     })
+  }
+
+  handleFileSelect($event) {
+    this.imagePath = $event.target.value;
+    var files = $event.target.files;
+    var file = files[0];
+
+    if (files && file) {
+        var reader = new FileReader();
+
+        reader.onload =this._handleReaderLoaded.bind(this);
+
+        reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.img64= btoa(binaryString);
+    this.changeImageMenu = true
+  }
+
+  handleFileSelectMeal($event) {
+    this.imagePath = $event.target.value;
+    var files = $event.target.files;
+    var file = files[0];
+
+    if (files && file) {
+        var reader = new FileReader();
+
+        reader.onload =this._handleReaderLoadedMeal.bind(this);
+
+        reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoadedMeal(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.img64= btoa(binaryString);
+    this.changeImageMeal = true
+  }
+
+  async modifierImage(id: number, type: String) {
+    console.log(id);
+    console.log(type)
+    var obj = {
+      imagePath: this.imagePath,
+      image64: "data:image/jpeg;base64,"+this.img64
+    }
+    console.log(obj);
+
+    if(type =="menu") {
+      return await this.cantiniere_service.updateMenuImage(id, JSON.stringify(obj))
+      .then(res => {
+        console.log("res", res);
+      })
+      .catch(err => {
+        console.log("err", err);
+      })
+    }
+
+    if(type =="meal") {
+      return await this.meal_service.updateMealImage(id, JSON.stringify(obj))
+      .then(res => {
+        console.log("res", res);
+      })
+      .catch(err => {
+        console.log("err", err);
+      })
+    }
+    
+  }
+
+  annulerImage(type: String) {
+    if(type == "menu") {
+      this.changeImageMenu = false;
+    }
+    if(type == "meal") {
+      this.changeImageMeal = false;
+    }
   }
 
 

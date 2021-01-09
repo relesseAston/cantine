@@ -7,7 +7,8 @@
         <mat-grid-list cols="4" rowHeight="100px">
             <form [formGroup]="userForm">
                 <mat-grid-tile colspan="1" rowspan="3">
-                    <img [src]="currentUser && currentUser.image64"/>
+                    <img *ngIf="!changeImage" [src]="currentUser && currentUser.image64"/>
+                    <img *ngIf="changeImage" src="data:image/jpeg;base64,{{img64}}"/>
                 </mat-grid-tile>
     
                 <mat-grid-tile colspan="1" rowspan="1">
@@ -74,7 +75,9 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="1">
-                    <button mat-raised-button color="primary" type="button">changer image</button>
+                    <input *ngIf="!changeImage" type="file" (change)="handleFileSelect($event)" placeholder="choisir image"/>
+                    <button *ngIf="changeImage" mat-raised-button color="primary" type="button" (click)="modifierImage()">modifier</button>
+                    <button *ngIf="changeImage" mat-raised-button color="primary" type="button" (click)="annulerImage()">annuler</button>
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="2" rowspan="1">
