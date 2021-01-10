@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { WalletSnackbarComponent } from './wallet-snackbar.component';
+import { MatSnackBarRef } from '@angular/material/snack-bar';
 
 describe('WalletSnackbarComponent', () => {
   let component: WalletSnackbarComponent;
@@ -8,8 +10,9 @@ describe('WalletSnackbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WalletSnackbarComponent ]
-    })
+      declarations: [ WalletSnackbarComponent ],
+      providers: [ {provide: MatSnackBarRef, useValue: {}} ]
+      })
     .compileComponents();
   }));
 

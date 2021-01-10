@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { NewMealComponent } from './new-meal.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { FormBuilder } from '@angular/forms';
+import { IngredientService } from 'src/service/ingredient.service';
+import { MealService } from 'src/service/meal.service';
 
 describe('NewMealComponent', () => {
   let component: NewMealComponent;
@@ -8,7 +13,9 @@ describe('NewMealComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewMealComponent ]
+      declarations: [ NewMealComponent ],
+      providers: [ FormBuilder, HttpHandler, HttpClient, IngredientService, MealService ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

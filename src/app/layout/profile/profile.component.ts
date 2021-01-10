@@ -35,8 +35,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let user = this.token_service.getUser().user
-    if(!user.isLunchLady && user.id != this.id_user) {
+    let user
+    if(this.token_service.getUser()) user = this.token_service.getUser().user
+    if(user && !user.isLunchLady && user.id != this.id_user) {
       window.location.replace("accueil");
     }
     this.getUserById(this.id_user);

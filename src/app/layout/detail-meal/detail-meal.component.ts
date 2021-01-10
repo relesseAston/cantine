@@ -21,7 +21,6 @@ export class DetailMealComponent implements OnInit {
   constructor(private route: ActivatedRoute, private cantiniere_service: CantiniereServiceService, private igrd_service: IngredientService, private cart: CartComponent) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap)
     this.mealId = parseInt(this.route.snapshot.paramMap.get("mealId"));
     this.getMealById();
     this.getImageMeal();

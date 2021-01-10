@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { NewIngredientComponent } from './new-ingredient.component';
+import { FormBuilder } from '@angular/forms';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('NewIngredientComponent', () => {
   let component: NewIngredientComponent;
@@ -8,7 +11,9 @@ describe('NewIngredientComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewIngredientComponent ]
+      declarations: [ NewIngredientComponent ],
+      providers: [ FormBuilder, HttpClient, HttpHandler ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));
