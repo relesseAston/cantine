@@ -17,4 +17,16 @@ describe('WalletService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('#creditUser should return User', () => {
+    service.creditUser(1, "2").subscribe(data => {
+      expect(data.id).toEqual(1)
+    })
+  })
+
+  it('#debitUser should return User', () => {
+    service.debitUser(1, "2").subscribe(data => {
+      expect(data.id).toEqual(1)
+    })
+  })
 });

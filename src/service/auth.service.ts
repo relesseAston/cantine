@@ -22,7 +22,6 @@ export class AuthService {
     let obs: Observable<any>
     const url = this.api_url+'forgotpassword';
     obs = this.http.post(url+"?email=" + email.email,{})
-    console.log(obs)
     return obs;
   };
 }

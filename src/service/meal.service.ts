@@ -25,7 +25,7 @@ export class MealService {
   }
 
   async findAll() : Promise<any> {
-    return this.http.get<any>(API_ROOT + 'findall', this.httpOptions).toPromise();
+    return this.http.get(API_ROOT + 'findall', this.httpOptions).toPromise();
   }
 
   async addMeal(obj: any): Promise<any> {
