@@ -13,6 +13,8 @@ import { CantiniereServiceService } from 'src/service/cantiniere-service.service
 import { MealService } from 'src/service/meal.service';
 import { IngredientService } from 'src/service/ingredient.service';
 import { Overlay } from '@angular/cdk/overlay';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmDialogComponent } from 'src/app/component/confirm-dialog/confirm-dialog.component';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -21,7 +23,7 @@ describe('AdminComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminComponent ],
-      imports: [MatTableModule, MatDialogModule ],
+      imports: [MatTableModule, MatDialogModule, BrowserAnimationsModule, NoopAnimationsModule ],
       providers: [ HttpClient, HttpHandler, {provide: Router, useValue: {}}, {provide: ActivatedRoute, useValue: {
           snapshot: {
             paramMap: {
@@ -44,4 +46,5 @@ describe('AdminComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

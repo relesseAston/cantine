@@ -37,4 +37,8 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('#logout should sign out the token_storage', () => {
+    expect(component.logout).toBeTruthy();
+  })
 });

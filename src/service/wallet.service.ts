@@ -21,7 +21,7 @@ export class WalletService {
   }
 
   creditUser(id:number, amount: string) :Observable<any>{
-    console.log(this.httpOptions);
+    //console.log(this.httpOptions);
     let parsedAmount = parseInt(amount);
     return this.http.post<any>(this.api_url+'user/credit/'+id+'?amount='+parsedAmount, {}, this.httpOptions);
   }
