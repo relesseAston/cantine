@@ -75,18 +75,19 @@ export class ProfileComponent implements OnInit {
   }
 
   patchValue() {
-    this.userForm.setValue({
-      name: [this.currentUser.name],
-      firstname: [this.currentUser.firstname],
-      email: [this.currentUser.email],
-      phone: [this.currentUser.phone],
-      address: [this.currentUser.address],
-      postalCode: [this.currentUser.postalCode],
-      town: [this.currentUser.town],
-      wallet: [this.currentUser.wallet],
-      password: [''],
-      sex: [this.currentUser.sex],
-      isLunchLady: [this.currentUser.isLunchLady],
+
+    this.userForm.patchValue({
+      name: this.currentUser.name,
+      firstname: this.currentUser.firstname,
+      email: this.currentUser.email,
+      phone: this.currentUser.phone,
+      address: this.currentUser.address,
+      postalCode: this.currentUser.postalCode,
+      town: this.currentUser.town,
+      wallet: this.currentUser.wallet,
+      password: '',
+      sex: this.currentUser.sex,
+      isLunchLady: this.currentUser.isLunchLady,
     })
   }
 
