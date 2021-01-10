@@ -55,7 +55,9 @@ export class ModifMealComponent implements OnInit {
   }
 
   deleteCurrentIgrd(id_igrd) {
-    var index = this.current_igrd.indexOf(id_igrd);
+    var index = this.current_igrd.map(x => {
+      return x.id;
+    }).indexOf(id_igrd);
     this.current_igrd.splice(index, 1);
   }
 

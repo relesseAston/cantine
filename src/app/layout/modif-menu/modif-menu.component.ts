@@ -14,7 +14,6 @@ export class ModifMenuComponent implements OnInit {
   menuId : number;
   menu: any;
   menuForm: FormGroup;
-  //weeks = new FormArray([]);
   idMeals = new FormArray([]);
   weekString = [];
   meals = [];
@@ -86,7 +85,9 @@ export class ModifMenuComponent implements OnInit {
   }
 
   deleteCurrentMeal(id_meal) {
-    var index = this.current_meal.indexOf(id_meal);
+    var index = this.current_meal.map(x => {
+      return x.id;
+    }).indexOf(id_meal);
     this.current_meal.splice(index, 1);
   }
 
@@ -124,7 +125,7 @@ export class ModifMenuComponent implements OnInit {
     return this.cantiniere_service.updateMenu(this.menuId, JSON.stringify(obj))
     .then(res => {
       console.log('res', res);
-      window.location.assign('/admin');
+      window.location.assign('/admin/gestion-menu');
     })
     .catch(err => {
       console.log('err', err);
