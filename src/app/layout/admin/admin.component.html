@@ -176,7 +176,7 @@
         <div class="row">
             <div *ngFor="let menu of menus" class="div">
                 <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
                         <mat-expansion-panel-header class="expansion_panel">
                             <img *ngIf="!changeImageMenu" src={{menu.img}} alt="menu img">
                             <img *ngIf="changeImageMenu" src="data:image/jpeg;base64,{{img64}}"/>
@@ -217,7 +217,7 @@
         <div class="row">
             <div *ngFor="let meal of meals" class="div">
                 <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hiddeToggle>
                         <mat-expansion-panel-header class="expansion_panel">
                             <img *ngIf="!changeImageMeal" src={{meal.img}} alt="meal img">
                             <img *ngIf="changeImageMeal" src="data:image/jpeg;base64,{{img64}}"/>
