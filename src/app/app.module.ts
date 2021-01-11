@@ -48,6 +48,7 @@ import { LoginSnackbarComponent } from './component/login-snackbar/login-snackba
 import { ModifMenuComponent } from './layout/modif-menu/modif-menu.component';
 import { ModifMealComponent } from './layout/modif-meal/modif-meal.component';
 import { WalletSnackbarComponent } from './component/wallet-snackbar/wallet-snackbar.component';
+import { ToolateSnackbarComponent } from './component/toolate-snackbar/toolate-snackbar.component';
 
 
 
@@ -74,7 +75,8 @@ import { WalletSnackbarComponent } from './component/wallet-snackbar/wallet-snac
     LoginSnackbarComponent,
     ModifMenuComponent,
     ModifMealComponent,
-    WalletSnackbarComponent
+    WalletSnackbarComponent,
+    ToolateSnackbarComponent
   ],
   imports: [
     BrowserModule,

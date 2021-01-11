@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginSnackbarComponent } from 'src/app/component/login-snackbar/login-snackbar.component';
 import { UserService } from 'src/service/user.service';
 import { WalletSnackbarComponent } from 'src/app/component/wallet-snackbar/wallet-snackbar.component';
+import { ToolateSnackbarComponent } from 'src/app/component/toolate-snackbar/toolate-snackbar.component'
 
 const EMPTY_CART = []
 
@@ -53,9 +54,13 @@ export class CartComponent implements OnInit {
   }
 
   order() {
+    let now = new Date()
+    //console.log(now.getHours())
     if (this.token_service.getUser()) {
       if (this.userWallet < this.cartTotal) {
         this.openSnackBar('no money');
+      } else if((now.getHours() >= 10 && now.getUTCMinutes() >= 30) || now.getHours() > 10) {
+        this.openSnackBar('too late')
       } else {
         this.orderService.addOrder({
           userId: this.token_service.getUser().user.id,
@@ -158,6 +163,12 @@ export class CartComponent implements OnInit {
           duration: 20000,
         });
         break;
+
+      case 'too late': 
+      this._snackBar.openFromComponent(ToolateSnackbarComponent, {
+        duration: 20000
+      })
+      break
     }
     
   }
