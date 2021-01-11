@@ -75,13 +75,4 @@ describe('ModifMealComponent', () => {
     })
   })
 
-  it('#getIgrds should get all meal\'s ingredients', async() => {
-    await component.getIgrds()
-
-    ingredientService.getAllIgrd().then(data => {
-      expect(component.igrds).toEqual(data);
-    }).catch(error => {
-      expect(error.status).toEqual(401)
-    })
-  })
 });
