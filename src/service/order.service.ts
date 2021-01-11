@@ -25,7 +25,7 @@ export class OrderService {
   }
 
   addOrder(cart) {
-    //console.log(cart)
+    // console.log(cart)
     return this.http.put(ORDER_ROOT + '/add', JSON.stringify(cart), this.httpOptions);
   }
 
@@ -48,6 +48,10 @@ export class OrderService {
 
   pay(id: number) {
     return this.http.patch(ORDER_ROOT + '/deliverandpay/' + id + '/' + 1, {}, this.httpOptions);
+  }
+
+  findById(id: number) {
+    return this.http.get(ORDER_ROOT + '/find/' + id, this.httpOptions)
   }
 
 }

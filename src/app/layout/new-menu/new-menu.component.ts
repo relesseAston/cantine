@@ -95,10 +95,10 @@ export class NewMenuComponent implements OnInit {
     
     return await this.cantiniere_service.addMenu(JSON.stringify(obj))
     .then(res => {
-      //console.log("res : ", res);
+      // console.log("res : ", res);
     })
     .catch(err => {
-      //console.log("err : ", err);
+      // console.log("err : ", err);
     })
 
   }

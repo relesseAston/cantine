@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
   async getUserById(id_user : number) {
     const response = await this.user_service.getUserById(id_user);
     this.currentUser = response;
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
     this.getUserImg(id_user);
   }
 
@@ -100,14 +100,14 @@ export class ProfileComponent implements OnInit {
   }
 
   modificationProfile(idUser: number) {
-    console.log(idUser);
-    console.log(this.userForm.value);
+    // console.log(idUser);
+    // console.log(this.userForm.value);
     this.user_service.updateProfile(idUser, JSON.stringify(this.userForm.value))
     .then(res => {
-      console.log('res', res)
+      // console.log('res', res)
     })
     .catch(err => {
-      console.log('err', err);
+      // console.log('err', err);
     });
   }
 
@@ -115,7 +115,7 @@ export class ProfileComponent implements OnInit {
     this.order_service.findAllbyUser(id_user)
     .subscribe(data => {
       this.commandes = data;
-      console.log(data);
+      //// console.log(data);
     })
   }
 
@@ -144,14 +144,14 @@ export class ProfileComponent implements OnInit {
       imagePath: this.imagePath,
       image64: "data:image/jpeg;base64,"+this.img64
     }
-    console.log(obj);
+    //// console.log(obj);
 
     return this.user_service.updateImage(JSON.stringify(obj), this.id_user)
     .then(res => {
-      console.log("res", res);
+      // console.log("res", res);
     })
     .catch(err => {
-      console.log("err", err);
+      // console.log("err", err);
     })
 
   }

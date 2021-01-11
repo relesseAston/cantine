@@ -103,9 +103,6 @@ import { WalletSnackbarComponent } from './component/wallet-snackbar/wallet-snac
     MatSnackBarModule,
     MatMenuModule
   ],
-  entryComponents: [
-    ConfirmDialogComponent
-  ],
   providers: [
     //{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],

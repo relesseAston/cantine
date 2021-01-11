@@ -61,7 +61,7 @@ export class CartComponent implements OnInit {
           userId: this.token_service.getUser().user.id,
           constraintId: 1,
           quantity: this.cart
-        }).subscribe(data => console.log(data))
+        }).subscribe(data => {})
       }
       
     } else {
@@ -71,7 +71,7 @@ export class CartComponent implements OnInit {
   }
 
   resetCart() {
-    this.cart = EMPTY_CART;
+    this.cart = [];
   }
 
   fillCartTable() {
@@ -85,7 +85,7 @@ export class CartComponent implements OnInit {
             quantity: row.quantity
           }
           let found = this.cartTable.find(element => element["id"] == meal["id"]) 
-          //console.log(found)
+          // console.log(found)
           if(typeof found === 'undefined') this.cartTable.push(obj)
         
       }) 
@@ -94,7 +94,7 @@ export class CartComponent implements OnInit {
   }
 
   cartMenuLessQuantity(id) {
-    //console.log(this.cart)
+    // console.log(this.cart)
     for (let i = 0; i < this.cart.length; i++) {
       const row = this.cart[i];
       if (row.mealId == id) {
@@ -105,7 +105,7 @@ export class CartComponent implements OnInit {
 
     this.cartTable.forEach(row => {
       if (row.id == id) {
-        //console.log(row)
+        // console.log(row)
         row.quantity--;
       }
     })
@@ -125,7 +125,7 @@ export class CartComponent implements OnInit {
 
     this.cartTable.forEach(row => {
       if (row.id == id) {
-        //console.log(row)
+        // console.log(row)
         row.quantity++;
       }
     })
@@ -180,7 +180,6 @@ export class CartComponent implements OnInit {
     for (let index = 0; index < this.cart.length; index++) {
       const element = this.cart[index];
       this.getMeal(element.mealId).subscribe(meal => {
-        console.log(meal)
         this.cartTotal = this.cartTotal + meal["priceDF"] * element.quantity
       })
     }

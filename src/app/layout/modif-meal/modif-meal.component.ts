@@ -36,7 +36,7 @@ export class ModifMealComponent implements OnInit {
     .subscribe(data => {
       this.meal = data;
       this.getImageMeal(this.meal.id);
-      console.log(this.meal);
+       //console.log(this.meal);
     })
   }
 
@@ -90,7 +90,7 @@ export class ModifMealComponent implements OnInit {
         this.current_igrd.push({id: element.id, label: element.label})
       })
     }
-    console.log(this.meal.imgPath);
+     console.log(this.meal.imgPath);
     this.weekString = this.meal.availableForWeeks;
     this.mealForm.setValue({
       description: '',
@@ -131,15 +131,15 @@ export class ModifMealComponent implements OnInit {
       ingredientsId: igrdIdTab,
       category: form.category
     };
-    console.log(obj);
+     console.log(obj);
 
     return this.meal_service.updateMeal(this.mealId, JSON.stringify(obj))
     .then(res => {
-      console.log('res', res);
+       console.log('res', res);
       window.location.assign('/admin');
     })
     .catch(err => {
-      console.log('err', err);
+       console.log('err', err);
     })
 
   }

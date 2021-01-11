@@ -28,7 +28,7 @@ export class DetailMealComponent implements OnInit {
 
   async getMealById() {
     const response = await this.cantiniere_service.getMealById(this.mealId);
-    //console.log(response);
+    // console.log(response);
     if(response.description == undefined) {
       response.description = "aucune description";
     }
@@ -58,11 +58,13 @@ export class DetailMealComponent implements OnInit {
   }
 
   changeQuantity(quantity) {
+    // console.log(quantity)
     if(quantity > 0) this.quantity = quantity;
+    // console.log(this.quantity)
   }
 
   addToCart() {
-    console.log(this.meal)
+    // console.log(this.meal)
     const orderMeal = {
       quantity: this.quantity,
       menuId: null,

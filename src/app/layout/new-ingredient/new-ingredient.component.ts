@@ -52,10 +52,10 @@ export class NewIngredientComponent implements OnInit {
     if(form.image.imagePath != "") form.image.image64 = "data:image/jpeg;base64,"+this.img64;
     return await this.ingredient_service.addIgrd(JSON.stringify(form))
     .then(res => {
-      //console.log('res : ', res);
+      // console.log('res : ', res);
     })
     .catch(err => {
-      //console.log('err : ', err);
+      // console.log('err : ', err);
     })
 
   }

@@ -32,7 +32,7 @@ export class ModifMenuComponent implements OnInit {
   async getMeals() {
     const response = await this.meal_service.findAll();
     this.meals = response;
-    console.log(this.meals);
+     console.log(this.meals);
   }
 
   async getMenuById(menuId: number) {
@@ -81,7 +81,7 @@ export class ModifMenuComponent implements OnInit {
       availableForWeeks: this.weekString.toString(),
       mealIds: ['']
     });
-    console.log(this.menuForm.value);
+     console.log(this.menuForm.value);
   }
 
   deleteCurrentMeal(id_meal) {
@@ -121,14 +121,14 @@ export class ModifMenuComponent implements OnInit {
       availableForWeeks: weekTab,
       mealIds: mealIdTab
     };
-    console.log(obj);
+     console.log(obj);
     return this.cantiniere_service.updateMenu(this.menuId, JSON.stringify(obj))
     .then(res => {
-      console.log('res', res);
+       console.log('res', res);
       window.location.assign('/admin/gestion-menu');
     })
     .catch(err => {
-      console.log('err', err);
+       console.log('err', err);
     })
   }
 

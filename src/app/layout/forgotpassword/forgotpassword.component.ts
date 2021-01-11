@@ -25,8 +25,8 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
     this.service.forgotPassword(this.forgotForm.value)
     .subscribe(
       res => {
-        console.log('Votre mot de passe à été réinitialisé, veillez vérifier votre boite mail'); },
-        (err) => {console.log('err', err)},
+         console.log('Votre mot de passe à été réinitialisé, veillez vérifier votre boite mail'); },
+        (err) => { console.log('err', err)},
         () => {});
       }
 

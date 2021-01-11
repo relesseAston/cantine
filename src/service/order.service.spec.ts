@@ -63,4 +63,11 @@ describe('OrderService', () => {
       expect(data["statut"]).toEqual(1)
     })
   })
+
+  it('#findById should get specific order ', () => {
+    service.findById(1).subscribe(data => {
+      expect(data).toBe(true)
+      expect(data["id"]).toEqual(1)
+    })
+  })
 });

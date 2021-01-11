@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     const form = this.userProfile.value;
     this.authService.login(JSON.stringify(form))
     .then( res => {
-        console.log(res);
+         console.log(res);
         let token = res.headers.get('Authorization').split('Bearer').pop()
         let user = jwt_decode(token);
         this.tokenStorage.saveToken(token);
@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
         this.reloadPage();
     },
     ).catch(err => {
-      console.log('err : ', err);
+       console.log('err : ', err);
       this.errorMessage = err.error.message;
-      //console.log(this.errorMessage);
+      // console.log(this.errorMessage);
       this.isLoginFailed = true;
     }
 

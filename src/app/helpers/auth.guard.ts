@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot) {
         const currentUser = this.token_service.getUser().user;
-        //console.log(currentUser);
+        // console.log(currentUser);
         const lunchLadyRole = route.data.lunchLadyRole;
         if(currentUser) {
             //check if route is restricted by role
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
                 return false;
             }
 
-            console.log("fin 1");
+             console.log("fin 1");
 
             //authorised so return true
             return true;

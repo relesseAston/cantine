@@ -58,14 +58,14 @@ export class InscriptionComponent implements OnInit {
       this.user_service.setInscription(form)
         .subscribe(
           rest => {
-            console.log(rest);
+             console.log(rest);
           }
         )
       this.inscriptionForm.reset();
-      console.log("form is valid");
+       console.log("form is valid");
     } 
     else {
-      console.log("error");
+       console.log("error");
       if (this.inscriptionForm.controls.name.invalid) {
 
         this.name = "Le prénom est obligatoire"

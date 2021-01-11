@@ -30,7 +30,7 @@ export class UserService {
   }
 
   async getImgUser(id_user: number): Promise<any> {
-    //console.log(this.httpOptions);
+    // console.log(this.httpOptions);
     return this.http.get<any>(this.api_url+'user/findimg/'+id_user, this.httpOptions).toPromise();
   }
 

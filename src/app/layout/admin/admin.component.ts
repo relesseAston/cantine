@@ -71,7 +71,7 @@ export class AdminComponent implements OnInit {
     this.order_service.findAll().subscribe((data) => {
       this.commandes_passees = data;
       //this.dataSource2.data = this.commandes_passees;
-      //console.log(this.commandes_passees);
+      // console.log(this.commandes_passees);
     });
     this.order_service.findTodayOrders().subscribe(data => {
       this.todayOrders = data
@@ -107,7 +107,7 @@ export class AdminComponent implements OnInit {
         this.order_service
           .cancel(id)
           .subscribe(() => window.location.reload());
-          //console.log("Commande n°" + id + " annulée !");
+          // console.log("Commande n°" + id + " annulée !");
       }
     });
   }
@@ -124,7 +124,7 @@ export class AdminComponent implements OnInit {
         this.order_service
           .pay(id)
           .subscribe(() => window.location.reload());
-          //console.log("Commande n°" + id + " validée et payée !");
+          // console.log("Commande n°" + id + " validée et payée !");
       }
     });
   }
@@ -160,7 +160,7 @@ export class AdminComponent implements OnInit {
     /*.subscribe( (data) => {
       this.users = data.body;
       this.users = this.sortUsersByName(this.users);
-      // console.log(this.users);
+      //  console.log(this.users);
       this.dataSource.data = this.users;
     })*/
   }
@@ -348,31 +348,31 @@ export class AdminComponent implements OnInit {
   }
 
   async modifierImage(id: number, type: String) {
-    console.log(id);
-    console.log(type)
+     console.log(id);
+     console.log(type)
     var obj = {
       imagePath: this.imagePath,
       image64: "data:image/jpeg;base64,"+this.img64
     }
-    console.log(obj);
+     console.log(obj);
 
     if(type =="menu") {
       return await this.cantiniere_service.updateMenuImage(id, JSON.stringify(obj))
       .then(res => {
-        console.log("res", res);
+         console.log("res", res);
       })
       .catch(err => {
-        console.log("err", err);
+         console.log("err", err);
       })
     }
 
     if(type =="meal") {
       return await this.meal_service.updateMealImage(id, JSON.stringify(obj))
       .then(res => {
-        console.log("res", res);
+         console.log("res", res);
       })
       .catch(err => {
-        console.log("err", err);
+         console.log("err", err);
       })
     }
     

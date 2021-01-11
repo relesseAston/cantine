@@ -22,7 +22,6 @@ export class MenusComponent implements OnInit {
   async getWeekMenus(){
     const response = await this.cantiniere_api.getWeekMenus();
     this.listeMenus = response;
-    console.log(this.listeMenus);
     this.listeMenus.forEach(element => {
       this.getImageMenu(element.id);
       if(element.meals) {
@@ -36,7 +35,7 @@ export class MenusComponent implements OnInit {
   async getWeekMeals() {
     const response = await this.cantiniere_api.getWeekMeal();
     this.listeMenus = response;
-    console.log(this.listeMenus)
+    // console.log(this.listeMenus)
     this.listeMenus.forEach(element => {
       this.getImageMealbyId(element.id);
     })
@@ -73,17 +72,5 @@ export class MenusComponent implements OnInit {
           }
         })
     }
-  
-
-  addPanier(id_menu: number) {
-    var id_meal = this.radioSelected;
-    var quantity: number = +(<HTMLInputElement>document.getElementById(this.radioSelected.toString())).value;
-    var order = {
-      quantity: quantity,
-      mealId: id_meal,
-      menuId: id_menu
-    }
-    console.log(order);
-  }
 
 }

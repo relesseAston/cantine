@@ -4,7 +4,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ForgotpasswordComponent } from './forgotpassword.component';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/service/auth.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 
 describe('ForgotpasswordComponent', () => {
   let component: ForgotpasswordComponent;
@@ -13,7 +13,8 @@ describe('ForgotpasswordComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ForgotpasswordComponent ],
-      providers: [ FormBuilder, AuthService, HttpClient, HttpHandler],
+      imports: [HttpClientModule],
+      providers: [ FormBuilder, AuthService],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
@@ -28,4 +29,8 @@ describe('ForgotpasswordComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('#onSubmit should send an email', () => {
+    expect(component.onSubmit()).toBeUndefined()
+  })
 });
