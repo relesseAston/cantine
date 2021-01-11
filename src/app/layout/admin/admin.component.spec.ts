@@ -118,7 +118,7 @@ describe('AdminComponent', () => {
   })
 
   it('#getUsers should get all users', async() => {
-
+    fixture.detectChanges()
     userService.getAllUser().then(data => {
       expect(component.usersTab).toEqual(component.sortUsersByName(data))
     }).catch(error => expect(error["status"]).toEqual(401))
